@@ -1,0 +1,66 @@
+/* src/pages/Library.css */
+.library-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  height: 100vh; /* Đảm bảo chiều cao chiếm toàn bộ màn hình */
+}
+
+.traffic-signs-grid {
+  width: 70%; /* Điều chỉnh phần danh sách ô chiếm 70% */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Tạo lưới với 4 ô trên một hàng */
+  grid-auto-rows: 350px; /* Tất cả các ô sẽ có chiều cao 200px */
+  gap: 15px; /* Khoảng cách giữa các ô */
+}
+
+.traffic-sign-card {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.traffic-sign-card:hover {
+  transform: scale(1.05);
+}
+
+.traffic-sign-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.traffic-sign-card h3 {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.traffic-sign-details {
+  width: 28%; /* Phần chi tiết chiếm 28% chiều rộng */
+  padding: 20px;
+  border-left: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.traffic-sign-details img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.traffic-sign-details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.traffic-sign-details p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
