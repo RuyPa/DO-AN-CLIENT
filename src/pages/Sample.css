@@ -1,0 +1,111 @@
+.sample-container {
+  display: flex;
+  padding: 20px;
+  height: 100vh;
+}
+
+.samples-grid {
+  width: 30%; /* Chiếm 30% màn hình */
+  display: flex;
+  flex-direction: column; /* Các ảnh xếp dọc */
+  gap: 15px;
+  overflow-y: auto; /* Thêm scroll nếu nhiều ảnh */
+}
+
+.sample-card {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+/* .sample-card:hover {
+  transform: scale(1.05);
+} */
+
+.sample-card img {
+  width: 100%; /* Giữ kích thước cố định cho ảnh trong card */
+  height: auto; /* Giữ tỷ lệ ảnh */
+  border-radius: 4px;
+}
+
+.sample-details {
+  width: 70%; /* Chiếm 70% màn hình */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Canh trái để dễ đọc */
+  overflow: visible; /* Đảm bảo không có thanh cuộn */
+}
+
+.sample-details img {
+  width: 100%; /* Chiều rộng 100% để hình ảnh vừa khít với phần chứa */
+  height: auto; /* Giữ nguyên tỷ lệ hình ảnh */
+  object-fit: contain; /* Giữ hình ảnh trong tỷ lệ và không bị kéo dài */
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.label-table-container {
+  /* Xóa max-height và overflow-y để không có thanh cuộn */
+  width: 100%; /* Giữ nguyên độ rộng */
+}
+
+.label-table {
+  width: 100%; /* Giữ nguyên độ rộng của bảng */
+}
+
+.label-table th,
+.label-table td {
+  padding: 5px; /* Giảm padding để bảng nhỏ hơn */
+  text-align: center;
+  font-size: 12px; /* Giảm kích thước font */
+}
+
+.label-table th {
+  font-weight: bold;
+}
+
+.label-table td {
+  font-size: 12px; /* Giảm kích thước font cho các ô */
+  word-wrap: break-word; /* Cho phép từ tràn xuống dòng */
+}
+
+/* Co các cột cho các giá trị centerX, centerY, height, width */
+.label-table .small-column {
+  width: 20px; /* Giảm chiều rộng của các cột Center X, Center Y, Height, Width */
+}
+
+/* Mở rộng cột Traffic Sign Name */
+.label-table .traffic-sign-column {
+  width: 200px; /* Mở rộng cột tên biển báo */
+}
+
+/* Mở rộng cột Description */
+.label-table .description-column {
+  width: 400px; /* Mở rộng cột mô tả */
+  white-space: normal; /* Cho phép văn bản xuống dòng */
+  text-align: left;
+}
+
+/* Giảm kích thước hình ảnh trong cột */
+.label-table td img {
+  width: 50px; /* Giảm kích thước hình ảnh */
+  height: auto; /* Giữ nguyên tỷ lệ của hình ảnh */
+}
+
+/* Class để cắt bớt nội dung trong ô */
+.label-table .overflow {
+  overflow: hidden; /* Ẩn phần văn bản vượt quá chiều rộng cột */
+  white-space: nowrap; /* Giữ cho văn bản trong một dòng */
+  text-overflow: ellipsis; /* Thêm dấu ... nếu văn bản bị cắt */
+}
+
+canvas {
+  width: 100%; /* Đảm bảo chiều rộng phù hợp với container */
+  height: auto; /* Giữ nguyên tỷ lệ chiều cao */
+  display: block; /* Đảm bảo không có khoảng trắng dưới canvas */
+}

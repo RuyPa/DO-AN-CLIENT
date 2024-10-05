@@ -19,4 +19,14 @@
     text-decoration: none;
     color: black;
   }
+
+  .sidebar a {
+    text-decoration: none; /* Loại bỏ gạch chân */
+    color: inherit; /* Đảm bảo giữ nguyên màu chữ */
+  }
+  
+  .sidebar a:hover {
+    text-decoration: none; /* Đảm bảo không có gạch chân khi hover */
+  }
+  
   

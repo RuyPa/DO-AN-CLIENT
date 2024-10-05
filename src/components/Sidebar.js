@@ -9,6 +9,7 @@ function Sidebar() {
         <li><Link to="/home">Home</Link></li>
         <li><Link to="/profile">Profile</Link></li>
         <li><Link to="/library">Library</Link></li> {/* Thêm Library */}
+        <Link to="/sample">Sample</Link>
       </ul>
     </div>
   );

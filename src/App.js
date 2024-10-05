@@ -5,6 +5,8 @@ import Sidebar from './components/Sidebar';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Library from './pages/Library';  // Import Library component
+import Sample from './pages/Sample';
+
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/library" element={<Library />} /> {/* Thêm route Library */}
+            <Route path="/sample" element={<Sample />} />
           </Routes>
         </div>
       </div>

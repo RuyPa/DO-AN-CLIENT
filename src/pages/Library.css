@@ -10,7 +10,7 @@
   width: 70%; /* Điều chỉnh phần danh sách ô chiếm 70% */
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* Tạo lưới với 4 ô trên một hàng */
-  grid-auto-rows: 350px; /* Tất cả các ô sẽ có chiều cao 200px */
+  grid-auto-rows: 250px; /* Tất cả các ô sẽ có chiều cao 200px */
   gap: 15px; /* Khoảng cách giữa các ô */
 }
 
