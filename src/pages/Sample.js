@@ -28,7 +28,7 @@ const Sample = () => {
       const ctx = canvas.getContext('2d');
       const img = new Image();
   
-      img.src = `http://127.0.0.1:5000${selectedSample.path.replaceAll('\\', '/')}`;
+      img.src = `http://localhost:5000/get-file?path=${selectedSample.path.replaceAll('\\', '/')}`;
   
       img.onload = () => {
         // Đặt kích thước canvas theo kích thước ảnh
@@ -96,7 +96,7 @@ const Sample = () => {
           <h2>Name: {selectedSample.name}</h2>
           <p><strong>Code:</strong> {selectedSample.code}</p>
           <img
-            src={`http://127.0.0.1:5000${selectedSample.path.replaceAll('\\', '/')}`} // Sửa đường dẫn
+            src={`http://localhost:5000/get-file?path=${selectedSample.path.replaceAll('\\', '/')}`} // Sửa đường dẫn
             alt={selectedSample.name}
             style={{ display: 'none' }} // Ảnh gốc sẽ không hiển thị
           />
@@ -127,7 +127,7 @@ const Sample = () => {
                     <td className="small-column overflow" title={label.height}>{label.height.toFixed(2)}...</td>
                     <td className="small-column overflow" title={label.width}>{label.width.toFixed(2)}...</td>
                     <td>{label.traffic_sign.name}</td>
-                    <td className="description-column" title={label.traffic_sign.description}>{label.traffic_sign.description}</td>
+                    <td className="description-column-detail" title={label.traffic_sign.description}>{label.traffic_sign.description}</td>
                     <td>
                       <img
                         src={label.traffic_sign.path}
@@ -156,7 +156,7 @@ const Sample = () => {
             onClick={() => handleSampleClick(sample.id)}
           >
             <img
-              src={`http://127.0.0.1:5000${sample.path.replaceAll('\\', '/')}`} // Sửa đường dẫn
+              src={`http://localhost:5000/get-file?path=${sample.path.replaceAll('\\', '/')}`} // Sửa đường dẫn
               alt={sample.name}
             />
           </div>

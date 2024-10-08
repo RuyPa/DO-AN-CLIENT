@@ -1,7 +1,10 @@
 .sample-container {
   display: flex;
   padding: 20px;
+  padding-right: 0;
   height: 100vh;
+  margin-left: 200px; /* Tạo khoảng cách bằng với chiều rộng của sidebar */
+
 }
 
 .samples-grid {
@@ -13,7 +16,7 @@
 }
 
 .sample-card {
-  padding: 10px;
+  padding: 3px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -22,9 +25,9 @@
   transition: transform 0.2s ease;
 }
 
-/* .sample-card:hover {
-  transform: scale(1.05);
-} */
+.sample-card:hover {
+  transform: scale(1.01);
+}
 
 .sample-card img {
   width: 100%; /* Giữ kích thước cố định cho ảnh trong card */
@@ -50,62 +53,89 @@
 }
 
 .label-table-container {
-  /* Xóa max-height và overflow-y để không có thanh cuộn */
-  width: 100%; /* Giữ nguyên độ rộng */
+  width: 100%;
+  background-color: #f5f5f5; /* Màu nền nhẹ tạo sự tương phản cho bảng */
+  border-radius: 8px; /* Bo góc container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ để bảng nổi bật hơn */
 }
 
 .label-table {
-  width: 100%; /* Giữ nguyên độ rộng của bảng */
+  width: 100%;
+  border-collapse: collapse; /* Loại bỏ khoảng trống giữa các ô */
 }
 
 .label-table th,
 .label-table td {
-  padding: 5px; /* Giảm padding để bảng nhỏ hơn */
+  padding: 10px; /* Tăng padding để bảng dễ đọc và cân đối hơn */
   text-align: center;
-  font-size: 12px; /* Giảm kích thước font */
+  font-size: 14px; /* Tăng kích thước font cho dễ nhìn */
+  border-bottom: 1px solid #ddd; /* Đường viền mỏng giữa các hàng */
 }
 
 .label-table th {
-  font-weight: bold;
+  font-weight: 700; /* Tăng độ đậm của tiêu đề */
+  background-color: #007BFF; /* Màu nền xanh nổi bật cho tiêu đề */
+  color: rgb(255, 255, 255); /* Màu chữ trắng cho sự tương phản */
+  text-transform: uppercase; /* In hoa chữ cho chuyên nghiệp hơn */
+  /* border: none; */
+  border-color: black;
 }
 
 .label-table td {
-  font-size: 12px; /* Giảm kích thước font cho các ô */
-  word-wrap: break-word; /* Cho phép từ tràn xuống dòng */
+  font-size: 14px;
+  color: #333; /* Màu chữ tối hơn cho dễ đọc */
+  word-wrap: break-word;
 }
 
-/* Co các cột cho các giá trị centerX, centerY, height, width */
 .label-table .small-column {
-  width: 20px; /* Giảm chiều rộng của các cột Center X, Center Y, Height, Width */
+  width: 40px; /* Tăng chiều rộng một chút cho cột để dễ nhìn hơn */
 }
 
-/* Mở rộng cột Traffic Sign Name */
 .label-table .traffic-sign-column {
-  width: 200px; /* Mở rộng cột tên biển báo */
+  width: 250px; /* Điều chỉnh chiều rộng cột tên biển báo */
 }
 
-/* Mở rộng cột Description */
 .label-table .description-column {
-  width: 400px; /* Mở rộng cột mô tả */
-  white-space: normal; /* Cho phép văn bản xuống dòng */
+  width: 450px; /* Tăng kích thước cột mô tả để vừa với nội dung */
+  white-space: normal;
   text-align: left;
+  color: #ffffff; /* Màu chữ xám nhạt để phù hợp với phần mô tả */
 }
 
-/* Giảm kích thước hình ảnh trong cột */
+.label-table .description-column-detail{
+  width: 450px; /* Tăng kích thước cột mô tả để vừa với nội dung */
+  white-space: normal;
+  text-align: left;
+  color: #555; /* Màu chữ xám nhạt để phù hợp với phần mô tả */
+}
+
 .label-table td img {
-  width: 50px; /* Giảm kích thước hình ảnh */
-  height: auto; /* Giữ nguyên tỷ lệ của hình ảnh */
+  width: 60px; /* Tăng kích thước hình ảnh để rõ nét hơn */
+  height: auto;
+  border-radius: 4px; /* Bo góc nhẹ cho hình ảnh */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ cho hình ảnh */
 }
 
-/* Class để cắt bớt nội dung trong ô */
 .label-table .overflow {
-  overflow: hidden; /* Ẩn phần văn bản vượt quá chiều rộng cột */
-  white-space: nowrap; /* Giữ cho văn bản trong một dòng */
-  text-overflow: ellipsis; /* Thêm dấu ... nếu văn bản bị cắt */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 canvas {
-  width: 100%; /* Đảm bảo chiều rộng phù hợp với container */
-  height: auto; /* Giữ nguyên tỷ lệ chiều cao */
-  display: block; /* Đảm bảo không có khoảng trắng dưới canvas */
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Thêm hiệu ứng hover cho hàng */
+.label-table tr:hover {
+  background-color: #f0f8ff; /* Màu nền nhạt khi di chuột qua */
+}
+
+/* Tăng cường sự nổi bật cho ô được chọn */
+.label-table td.selected {
+  background-color: #d1ecf1; /* Màu xanh nhạt cho ô được chọn */
+  color: #0c5460; /* Màu chữ đậm để tạo sự tương phản */
+  font-weight: bold; /* Tăng độ đậm cho ô được chọn */
 }
