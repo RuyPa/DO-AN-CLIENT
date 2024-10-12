@@ -149,6 +149,7 @@ td:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 } */
 .btn-secondary {
+  width: 10%;
   background-color: #6c757d; /* Màu nền xám */
   color: white; /* Màu chữ trắng */
   padding: 10px 20px; /* Khoảng cách bên trong nút */
