@@ -26,7 +26,7 @@
 }
 
 .sample-card:hover {
-  transform: scale(1.01);
+  transform: scale(1.05);
 }
 
 .sample-card img {
@@ -139,3 +139,27 @@ canvas {
   color: #0c5460; /* Màu chữ đậm để tạo sự tương phản */
   font-weight: bold; /* Tăng độ đậm cho ô được chọn */
 }
+
+.add-sample-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: sticky; /* Giữ nút cố định khi cuộn */
+  top: 10px; /* Khoảng cách từ trên cùng của container */
+  z-index: 1000; /* Đảm bảo nút không bị che khuất */
+}
+
+.add-sample-button:hover {
+  background-color: #45a049;
+}
+
+.add-sample-button:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+

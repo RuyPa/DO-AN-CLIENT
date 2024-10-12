@@ -1,13 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Sample.css'; // Import file CSS
-import { useNavigate } from 'react-router-dom'; // Sử dụng useNavigate thay vì useHistory
 
 const Sample = () => {
   const [samples, setSamples] = useState([]);
   const [selectedSample, setSelectedSample] = useState(null);
   const canvasRef = useRef(null);
-  const navigate = useNavigate(); // Sử dụng useNavigate để điều hướng
-
 
   // Gọi API để lấy danh sách samples
   useEffect(() => {
@@ -87,19 +84,16 @@ const Sample = () => {
     }
   }, [selectedSample]);
   
-  const handleAddSample = () => {
-    navigate('/createSample'); // Điều hướng đến trang CreateSample
-  };
+  
   
   
 
   return (
-    
     <div className="sample-container">
       {/* Phần hiển thị chi tiết */}
       {selectedSample ? (
         <div className="sample-details">
-            <h2>Name: {selectedSample.name}</h2>
+          <h2>Name: {selectedSample.name}</h2>
           <p><strong>Code:</strong> {selectedSample.code}</p>
           <img
             src={`http://localhost:5000/get-file?path=${selectedSample.path.replaceAll('\\', '/')}`} // Sửa đường dẫn
@@ -153,26 +147,21 @@ const Sample = () => {
         </div>
       )}
 
-
       {/* Cột hiển thị hình ảnh của tất cả samples */}
       <div className="samples-grid">
-  <button className="btn btn-primary add-sample-button" onClick={handleAddSample}>
-    Add Sample
-  </button>
-  {samples.map((sample) => (
-    <div
-      key={sample.id}
-      className="sample-card"
-      onClick={() => handleSampleClick(sample.id)}
-    >
-      <img
-        src={`http://localhost:5000/get-file?path=${sample.path.replaceAll('\\', '/')}`}
-        alt={sample.name}
-      />
-    </div>
-  ))}
-</div>
-
+        {samples.map((sample) => (
+          <div
+            key={sample.id}
+            className="sample-card"
+            onClick={() => handleSampleClick(sample.id)}
+          >
+            <img
+              src={`http://localhost:5000/get-file?path=${sample.path.replaceAll('\\', '/')}`} // Sửa đường dẫn
+              alt={sample.name}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

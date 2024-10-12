@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Library from './pages/Library';  // Import Library component
 import Sample from './pages/Sample';
+import CreateSample from './pages/CreateSample';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/library" element={<Library />} /> {/* Thêm route Library */}
             <Route path="/sample" element={<Sample />} />
+            <Route path="/createSample" element={<CreateSample />} />
           </Routes>
         </div>
       </div>

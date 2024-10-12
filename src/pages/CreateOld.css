@@ -1,0 +1,68 @@
+.create-sample-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin-left: 200px;
+  }
+  
+  .create-form-container {
+    width: 67%; /* Manage the width of the form container */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .create-form-container input[type="text"],
+  .create-form-container input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .label-details-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .label-details-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .label-details-container th,
+  .label-details-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .label-details-container input[type="text"] {
+    width: 100%; /* Allows full use of cell space */
+    border: none;
+    text-overflow: ellipsis;
+  }
+  
+  .create-form-container button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .create-form-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .create-sample-container img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+  }
+  
