@@ -8,6 +8,7 @@ import Library from './pages/Library';  // Import Library component
 import Sample from './pages/Sample';
 import CreateSample from './pages/CreateSample';
 import Model from './pages/Model';
+import CreateModel from './pages/CreateModel';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/sample" element={<Sample />} />
             <Route path="/createSample" element={<CreateSample />} />
             <Route path="/model" element={<Model />} />
+            <Route path="/createModel" element={<CreateModel />} />
           </Routes>
         </div>
       </div>

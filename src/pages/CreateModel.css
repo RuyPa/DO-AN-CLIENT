@@ -1,0 +1,96 @@
+/* ModelCreation.css */
+.model-creation-section {
+  padding: 20px;
+  background-color: #f4f4f4;
+  margin-left: 220px;
+  padding-bottom: 120px; /* Để tránh đè lên phần footer */
+}
+
+
+.model-creation-start-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.model-creation-start-button:hover {
+  background-color: #0056b3;
+}
+
+.model-creation-progress {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+.model-creation-progress-bar {
+  margin-top: 10px;
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 10px; /* Bo tròn toàn bộ thanh nền */
+  overflow: hidden;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.model-creation-bar {
+  height: 30px;
+  background-color: #4caf50;
+  width: 0;
+  transition: width 0.4s ease-in-out; /* Hiệu ứng thay đổi độ rộng */
+  border-radius: 10px; /* Bo tròn cả hai đầu */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Đổ bóng để nổi bật */
+}
+
+
+.model-creation-bar-animated {
+  animation: progress-animation 2s ease-in-out forwards; /* Thêm hiệu ứng animation khi progress chạy */
+}
+
+@keyframes progress-animation {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.sample-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.sample-table th, .sample-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center; /* Căn giữa nội dung */
+  vertical-align: middle; /* Căn giữa theo chiều dọc */
+}
+
+
+.sample-table th {
+  background-color: #f2f2f2;
+}
+
+.sample-image {
+  max-width: 100px; /* Giới hạn chiều rộng tối đa nhưng giữ tỉ lệ */
+  height: auto; /* Giữ nguyên tỉ lệ chiều cao theo chiều rộng */
+}
+
+.model-creation-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 80%; /* Điều chỉnh để trừ ra khoảng cách của sidebar */
+  background-color: #ffffff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 240px;
+}

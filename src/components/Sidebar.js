@@ -66,14 +66,14 @@ function Sidebar() {
             Model
           </Link>
         </li>
-        {/* <li>
+        <li>
           <Link
-            to="/createSample"
-            className={location.pathname === '/createSample' ? 'active' : ''}
+            to="/createModel"
+            className={location.pathname === '/createModel' ? 'active' : ''}
           >
-            CreateSample
+            Train Model
           </Link>
-        </li> */}
+        </li>
       </ul>
     </div>
   );
