@@ -1,15 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
-import './Sample.css'; // Import file CSS
-import { useNavigate } from 'react-router-dom'; // Sử dụng useNavigate thay vì useHistory
+import './Sample.css'; // Import CSS file
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesome component
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'; // Import specific icons
+import { useNavigate } from 'react-router-dom';
 
 const Sample = () => {
   const [samples, setSamples] = useState([]);
   const [selectedSample, setSelectedSample] = useState(null);
   const canvasRef = useRef(null);
-  const navigate = useNavigate(); // Sử dụng useNavigate để điều hướng
+  const navigate = useNavigate(); // Use navigate for redirection
 
-
-  // Gọi API để lấy danh sách samples
+  // Fetch list of samples from the API
   useEffect(() => {
     fetch('http://127.0.0.1:5000/api/samples')
       .then((response) => response.json())
@@ -17,7 +18,7 @@ const Sample = () => {
       .catch((error) => console.error('Error fetching samples:', error));
   }, []);
 
-  // Khi bấm vào một ô, lấy chi tiết sample theo id
+  // Fetch details of a sample by ID when a sample is clicked
   const handleSampleClick = (id) => {
     fetch(`http://127.0.0.1:5000/api/samples/${id}`)
       .then((response) => response.json())
@@ -25,90 +26,76 @@ const Sample = () => {
       .catch((error) => console.error('Error fetching sample details:', error));
   };
 
+  // Load and draw image on canvas when a sample is selected
   useEffect(() => {
     if (selectedSample) {
       const canvas = canvasRef.current;
       const ctx = canvas.getContext('2d');
       const img = new Image();
-  
+
       img.src = `http://localhost:5000/get-file?path=${selectedSample.path.replaceAll('\\', '/')}`;
-  
+
       img.onload = () => {
-        // Đặt kích thước canvas theo kích thước ảnh
         canvas.width = img.width;
         canvas.height = img.height;
-      
-        // Kiểm tra kích thước ảnh và canvas
-        console.log(`Image Width: ${img.width}, Image Height: ${img.height}`);
-        console.log(`Canvas Width: ${canvas.width}, Canvas Height: ${canvas.height}`);
-      
-        // Xóa canvas trước khi vẽ
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-        // Vẽ ảnh lên canvas
         ctx.drawImage(img, 0, 0);
-      
-        // Tiếp tục với các bước vẽ hình chữ nhật
+
         selectedSample.labels.forEach((label, index) => {
           const { centerX, centerY, width, height } = label;
-        
-          // Chuyển đổi tỷ lệ sang pixel
           const x_center_px = centerX * canvas.width;
           const y_center_px = centerY * canvas.height;
           const w_px = width * canvas.width * 0.35;
           const h_px = height * canvas.height * 2.3;
-        
-          // Tính toán tọa độ góc trên bên trái của hình chữ nhật
           const x_min = x_center_px - w_px / 2;
           const y_min = y_center_px - h_px / 2;
-        
-          // In ra các giá trị tính toán
-          console.log(`Label ${label.id}:`);
-          console.log(`  Center X (px): ${x_center_px}`);
-          console.log(`  Center Y (px): ${y_center_px}`);
-          console.log(`  Width (px): ${w_px}`);
-          console.log(`  Height (px): ${h_px}`);
-          console.log(`  X Min: ${x_min}`);
-          console.log(`  Y Min: ${y_min}`);
-        
-          // Vẽ hình chữ nhật lên canvas
+
           ctx.strokeStyle = 'red';
           ctx.lineWidth = 1;
           ctx.strokeRect(x_min, y_min, w_px, h_px);
-        
-          // Vẽ số thứ tự vào bên trong hình chữ nhật
-          ctx.fillStyle = 'white'; // Màu chữ
-          ctx.font = '12px Arial'; // Kích thước và kiểu chữ
-          ctx.fillText(index + 1, x_min, y_min); // Vẽ số thứ tự, điều chỉnh tọa độ nếu cần
+          ctx.fillStyle = 'white';
+          ctx.font = '12px Arial';
+          ctx.fillText(index + 1, x_min, y_min);
         });
-        
       };
-      
     }
   }, [selectedSample]);
-  
+
   const handleAddSample = () => {
-    navigate('/createSample'); // Điều hướng đến trang CreateSample
+    navigate('/createSample');
   };
-  
-  
+
+  // Navigate to EditSample page with the selected sample ID
+  const handleEditSample = (id) => {
+    navigate(`/updateSample/${id}`);
+  };
+
+  // Delete sample with confirmation
+  const handleDeleteSample = (id) => {
+    if (window.confirm("Are you sure you want to delete this sample?")) {
+      fetch(`http://127.0.0.1:5000/api/samples/${id}`, {
+        method: 'DELETE'
+      })
+        .then(() => setSamples(samples.filter((sample) => sample.id !== id)))
+        .catch((error) => console.error('Error deleting sample:', error));
+    }
+  };
 
   return (
-    
     <div className="sample-container">
-      {/* Phần hiển thị chi tiết */}
+      {/* Sample Details */}
       {selectedSample ? (
         <div className="sample-details">
-            <h2>Name: {selectedSample.name}</h2>
+          <h2>Name: {selectedSample.name}</h2>
           <p><strong>Code:</strong> {selectedSample.code}</p>
           <img
-            src={`http://localhost:5000/get-file?path=${selectedSample.path.replaceAll('\\', '/')}`} // Sửa đường dẫn
+            src={`http://localhost:5000/get-file?path=${selectedSample.path.replaceAll('\\', '/')}`}
             alt={selectedSample.name}
-            style={{ display: 'none' }} // Ảnh gốc sẽ không hiển thị
+            style={{ display: 'none' }}
           />
           <canvas ref={canvasRef} />
 
-          {/* Hiển thị bảng chi tiết của labels */}
+          {/* Label Details Table */}
           <h3>Label Details</h3>
           <div className="label-table-container">
             <table className="label-table" border="1" cellPadding="10">
@@ -153,26 +140,44 @@ const Sample = () => {
         </div>
       )}
 
-
-      {/* Cột hiển thị hình ảnh của tất cả samples */}
+      {/* Samples Grid */}
       <div className="samples-grid">
-  <button className="btn btn-primary add-sample-button" onClick={handleAddSample}>
-    Add Sample
-  </button>
-  {samples.map((sample) => (
-    <div
-      key={sample.id}
-      className="sample-card"
-      onClick={() => handleSampleClick(sample.id)}
-    >
-      <img
-        src={`http://localhost:5000/get-file?path=${sample.path.replaceAll('\\', '/')}`}
-        alt={sample.name}
-      />
-    </div>
-  ))}
-</div>
-
+        <button className="btn btn-primary add-sample-button" onClick={handleAddSample}>
+          Add Sample
+        </button>
+        {samples.map((sample) => (
+          <div
+            key={sample.id}
+            className="sample-card"
+            onClick={() => handleSampleClick(sample.id)}
+          >
+            <img
+              src={`http://localhost:5000/get-file?path=${sample.path.replaceAll('\\', '/')}`}
+              alt={sample.name}
+            />
+            <div className="sample-actions">
+              <FontAwesomeIcon
+                icon={faEdit}
+                color="dodgerblue"
+                className="sample-action-icon"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleEditSample(sample.id);
+                }}
+              />
+              <FontAwesomeIcon
+                icon={faTrashAlt}
+                color="red"
+                className="sample-action-icon"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteSample(sample.id);
+                }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

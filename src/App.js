@@ -9,6 +9,7 @@ import Sample from './pages/Sample';
 import CreateSample from './pages/CreateSample';
 import Model from './pages/Model';
 import CreateModel from './pages/CreateModel';
+import UpdateSample from './pages/UpdateSample';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="/createSample" element={<CreateSample />} />
             <Route path="/model" element={<Model />} />
             <Route path="/createModel" element={<CreateModel />} />
+            <Route path="/updateSample/:id" element={<UpdateSample/>}/>
           </Routes>
         </div>
       </div>

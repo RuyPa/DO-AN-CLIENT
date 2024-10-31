@@ -163,3 +163,19 @@ canvas {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
+.sample-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.sample-action-icon {
+  cursor: pointer;
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+
+.sample-action-icon:hover {
+  transform: scale(1.1);
+}

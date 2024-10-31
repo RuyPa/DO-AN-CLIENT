@@ -4,7 +4,6 @@ import './Model.css';
 const Model = () => {
   const [models, setModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState(null);
-  const [selectedSample, setSelectedSample] = useState(null);
 
   // Fetch models from the API
   useEffect(() => {
@@ -17,12 +16,18 @@ const Model = () => {
   // Handle when a model is clicked
   const handleModelClick = (model) => {
     setSelectedModel(model);
-    setSelectedSample(null); // Reset sample when selecting a new model
   };
 
-  // Handle when a sample is clicked
-  const handleSampleClick = (sample) => {
-    setSelectedSample(sample);
+  // Handle retrain action
+  const handleRetrain = (modelId) => {
+    console.log(`Retrain model with ID: ${modelId}`);
+    // Add retrain logic here
+  };
+
+  // Handle delete action
+  const handleDelete = (modelId) => {
+    console.log(`Delete model with ID: ${modelId}`);
+    // Add delete logic here
   };
 
   return (
@@ -30,8 +35,8 @@ const Model = () => {
       {/* Model List Section */}
       <div className="model-list section">
         <h2>Model List</h2>
-        <div className="scrollable-table">
-          <table className="table">
+        <div className="scrollable-model-table">
+          <table className="model-table">
             <thead>
               <tr>
                 <th>Model Name</th>
@@ -40,23 +45,52 @@ const Model = () => {
                 <th>Accuracy</th>
                 <th>Precision</th>
                 <th>Recall</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
               {models.length > 0 ? (
                 models.map((model) => (
-                  <tr key={model.id} onClick={() => handleModelClick(model)}>
+                  <tr
+                    key={model.id}
+                    onClick={() => handleModelClick(model)}
+                    className={model.status === "1" ? 'active-model' : ''}
+                  >
                     <td>{model.name}</td>
                     <td>{new Date(model.date).toLocaleDateString()}</td>
                     <td>{model.f1}</td>
                     <td>{model.acc}</td>
                     <td>{model.pre}</td>
                     <td>{model.recall}</td>
+                    <td>
+                      <input type="checkbox" checked={model.status === "1"} readOnly />
+                    </td>
+                    <td>
+                      <button
+                        className="btn-action retrain"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRetrain(model.id);
+                        }}
+                      >
+                        Retrain
+                      </button>
+                      <button
+                        className="btn-action delete"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(model.id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="6">No models available</td>
+                  <td colSpan="8" className="no-content">No models available</td>
                 </tr>
               )}
             </tbody>
@@ -64,12 +98,12 @@ const Model = () => {
         </div>
       </div>
 
-      {/* Chỉ hiển thị Sample List khi đã chọn Model */}
+      {/* Sample List Section */}
       {selectedModel && (
         <div className="sample-list section">
           <h2>Sample List {selectedModel ? `for Model: ${selectedModel.name}` : ''}</h2>
-          <div className="scrollable-table">
-            <table className="table">
+          <div className="scrollable-sample-table">
+            <table className="sample-table">
               <thead>
                 <tr>
                   <th>Sample Code</th>
@@ -80,10 +114,7 @@ const Model = () => {
               <tbody>
                 {selectedModel.model_samples.length > 0 ? (
                   selectedModel.model_samples.map((modelSample) => (
-                    <tr
-                      key={modelSample.id}
-                      onClick={() => handleSampleClick(modelSample.sample)}
-                    >
+                    <tr key={modelSample.id}>
                       <td>{modelSample.sample.code}</td>
                       <td>{modelSample.sample.name}</td>
                       <td>
@@ -97,54 +128,7 @@ const Model = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="3">No samples available</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
-
-      {/* Chỉ hiển thị Label List khi đã chọn Sample */}
-      {selectedSample && (
-        <div className="label-list section">
-          <h2>Label Information {selectedSample ? `for Sample: ${selectedSample.name}` : ''}</h2>
-          <div className="scrollable-table">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Traffic Sign Name</th>
-                  <th>Description</th>
-                  <th>Center X</th>
-                  <th>Center Y</th>
-                  <th>Width</th>
-                  <th>Height</th>
-                  <th>Traffic Sign Image</th>
-                </tr>
-              </thead>
-              <tbody>
-                {selectedSample.labels.length > 0 ? (
-                  selectedSample.labels.map((label) => (
-                    <tr key={label.id}>
-                      <td>{label.traffic_sign.name}</td>
-                      <td>{label.traffic_sign.description}</td>
-                      <td>{label.centerX.toFixed(2)}</td>
-                      <td>{label.centerY.toFixed(2)}</td>
-                      <td>{label.width.toFixed(2)}</td>
-                      <td>{label.height.toFixed(2)}</td>
-                      <td>
-                        <img
-                          src={label.traffic_sign.path}
-                          alt={label.traffic_sign.name}
-                          style={{ width: '50px' }}
-                        />
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="7">No labels available</td>
+                    <td colSpan="3" className="no-content">No samples available</td>
                   </tr>
                 )}
               </tbody>

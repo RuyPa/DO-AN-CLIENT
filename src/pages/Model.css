@@ -1,36 +1,134 @@
-.section {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin-bottom: 20px;
+/* Container chính chiếm toàn bộ chiều cao màn hình */
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow: hidden; /* Ẩn thanh cuộn toàn màn hình */
+  box-sizing: border-box;
+}
+h2 {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
-.scrollable-table {
-  max-height: 300px; /* Đặt chiều cao tối đa cho bảng */
-  overflow-y: auto; /* Cho phép cuộn dọc khi nội dung vượt quá chiều cao */
+.model-list {
+  flex: 0 0 300px; /* Chiều cao cố định 300px cho bảng Model */
+  overflow: hidden;
+  padding: 15px; /* Thêm khoảng padding bên trong */
+  border-radius: 10px; /* Bo tròn các góc của phần bên ngoài */
+  border: 5px solid #e76969; /* Thêm viền nhẹ */
+  box-shadow: 0 4px 8px rgba(221, 57, 57, 0.1); /* Thêm bóng nhẹ để nổi bật hơn */
 }
 
-.table {
+
+.scrollable-model-table {
+  height: 85%; /* Chiều cao toàn phần của bảng trong container */
+  overflow-y: auto; /* Chỉ cho phép cuộn dọc trong phần bảng Model */
+  overflow-x: hidden;
+}
+
+.model-table {
   width: 100%;
   border-collapse: collapse;
+  padding-bottom: 30px;
 }
 
-.table th, .table td {
+.model-table th,
+.model-table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
 }
 
-.table th {
+.model-table th {
   background-color: #f2f2f2;
+  position: sticky;
+  top: 0; /* Giữ tiêu đề bảng Model cố định khi cuộn */
+  z-index: 1;
 }
 
-.table tr:hover {
+.model-table tr:hover {
   background-color: #f1f1f1;
   cursor: pointer;
 }
 
-img {
-  width: 100px;
-  height: auto;
+/* Phần Sample List chiếm phần còn lại */
+.sample-list {
+  flex: 1; /* Chiếm phần chiều cao còn lại */
+  overflow: hidden;
+}
+
+.scrollable-sample-table {
+  height: 100%; /* Chiều cao toàn phần của bảng Sample */
+  overflow-y: auto; /* Chỉ cho phép cuộn dọc trong phần bảng Sample */
+  overflow-x: hidden;
+  padding-bottom: 20px; /* Thêm khoảng đệm phía dưới cho bảng Sample */
+}
+
+.sample-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px; /* Thêm khoảng cách dưới cùng cho bảng Sample */
+}
+
+.sample-table th,
+.sample-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.sample-table th {
+  background-color: #f2f2f2;
+  position: sticky;
+  top: 0; /* Giữ tiêu đề bảng Sample cố định khi cuộn */
+  z-index: 1;
+}
+
+.sample-table tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.no-content {
+  color: #888;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Button styles for both tables */
+.btn-action {
+  padding: 5px 10px;
+  font-size: 0.9em;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 5px;
+  transition: background-color 0.3s ease;
+}
+
+.retrain {
+  background-color: #007bff;
+}
+
+.retrain:hover {
+  background-color: #0056b3;
+}
+
+.delete {
+  background-color: #dc3545;
+}
+
+.delete:hover {
+  background-color: #c82333;
+}
+
+.active-model {
+  background-color: #e0f7e0; /* Màu xanh lá nhạt cho hàng có status 1 */
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+  accent-color: #28a745;
 }
