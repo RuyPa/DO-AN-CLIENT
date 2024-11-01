@@ -1,134 +1,136 @@
-/* Container chính chiếm toàn bộ chiều cao màn hình */
 .container {
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  overflow: hidden; /* Ẩn thanh cuộn toàn màn hình */
-  box-sizing: border-box;
+  height: 93vh; /* Container takes 93% of the viewport height */
+  padding: 0; /* Remove any padding for the main container */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
+
 h2 {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 0; /* Remove top margin */
+  margin-bottom: 5px; /* Bottom margin for separation */
 }
 
 .model-list {
-  flex: 0 0 300px; /* Chiều cao cố định 300px cho bảng Model */
-  overflow: hidden;
-  padding: 15px; /* Thêm khoảng padding bên trong */
-  border-radius: 10px; /* Bo tròn các góc của phần bên ngoài */
-  border: 5px solid #e76969; /* Thêm viền nhẹ */
-  box-shadow: 0 4px 8px rgba(221, 57, 57, 0.1); /* Thêm bóng nhẹ để nổi bật hơn */
+  flex: 0 0 30%; /* Model list takes 30% of the height */
+  overflow: hidden; /* Hide overflow */
+  padding: 10px; /* Padding around the model list */
+  border-radius: 10px; /* Rounded corners */
+  border: 3px solid #e76969; /* Border color */
+  box-shadow: 0 4px 8px rgba(221, 57, 57, 0.1); /* Shadow effect */
+  margin-bottom: 20px; /* Space below the model list */
 }
 
-
 .scrollable-model-table {
-  height: 85%; /* Chiều cao toàn phần của bảng trong container */
-  overflow-y: auto; /* Chỉ cho phép cuộn dọc trong phần bảng Model */
-  overflow-x: hidden;
+  height: 80%; /* Height of the scrollable table */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Disable horizontal scrolling */
 }
 
 .model-table {
-  width: 100%;
-  border-collapse: collapse;
-  padding-bottom: 30px;
+  width: 100%; /* Full width */
+  border-collapse: collapse; /* Merge borders */
 }
 
 .model-table th,
 .model-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
+  border: 1px solid #ddd; /* Border for table cells */
+  padding: 10px; /* Padding for cells */
+  text-align: center; /* Center text */
 }
 
 .model-table th {
-  background-color: #f2f2f2;
-  position: sticky;
-  top: 0; /* Giữ tiêu đề bảng Model cố định khi cuộn */
-  z-index: 1;
+  background-color: #f2f2f2; /* Header background color */
+  position: sticky; /* Stick to the top when scrolling */
+  top: 0; /* Position sticky */
+  z-index: 1; /* Above other content */
 }
 
 .model-table tr:hover {
-  background-color: #f1f1f1;
-  cursor: pointer;
+  background-color: #f1f1f1; /* Hover effect */
+  cursor: pointer; /* Change cursor */
 }
 
-/* Phần Sample List chiếm phần còn lại */
+/* Sample List Section */
 .sample-list {
-  flex: 1; /* Chiếm phần chiều cao còn lại */
-  overflow: hidden;
+  flex: 1; /* Take remaining height */
+  overflow: hidden; /* Hide overflow */
+  padding: 10px; /* Padding around sample list */
+  border-radius: 10px; /* Rounded corners */
+  border: 3px solid #e76969; /* Border color */
+  box-shadow: 0 4px 8px rgba(221, 57, 57, 0.1); /* Shadow effect */
 }
 
 .scrollable-sample-table {
-  height: 100%; /* Chiều cao toàn phần của bảng Sample */
-  overflow-y: auto; /* Chỉ cho phép cuộn dọc trong phần bảng Sample */
-  overflow-x: hidden;
-  padding-bottom: 20px; /* Thêm khoảng đệm phía dưới cho bảng Sample */
+  height: 80%; /* Height of the sample table */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Disable horizontal scrolling */
 }
 
 .sample-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 10px; /* Thêm khoảng cách dưới cùng cho bảng Sample */
+  width: 100%; /* Full width */
+  border-collapse: collapse; /* Merge borders */
+  margin-bottom: 10px; /* Space below the sample table */
 }
 
 .sample-table th,
 .sample-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
+  border: 1px solid #ddd; /* Border for table cells */
+  padding: 8px; /* Padding for cells */
+  text-align: center; /* Center text */
 }
 
 .sample-table th {
-  background-color: #f2f2f2;
-  position: sticky;
-  top: 0; /* Giữ tiêu đề bảng Sample cố định khi cuộn */
-  z-index: 1;
+  background-color: #f2f2f2; /* Header background color */
+  position: sticky; /* Stick to the top when scrolling */
+  top: 0; /* Position sticky */
+  z-index: 1; /* Above other content */
 }
 
 .sample-table tr:hover {
-  background-color: #f1f1f1;
-  cursor: pointer;
+  background-color: #f1f1f1; /* Hover effect */
+  cursor: pointer; /* Change cursor */
 }
 
 .no-content {
-  color: #888;
-  text-align: center;
-  font-style: italic;
+  color: #888; /* Gray color for no content */
+  text-align: center; /* Centered text */
+  font-style: italic; /* Italic font style */
 }
 
 /* Button styles for both tables */
 .btn-action {
-  padding: 5px 10px;
-  font-size: 0.9em;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin: 0 5px;
-  transition: background-color 0.3s ease;
+  padding: 5px 10px; /* Button padding */
+  font-size: 0.9em; /* Font size */
+  color: white; /* Text color */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+  margin: 0 5px; /* Margin between buttons */
+  transition: background-color 0.3s ease; /* Transition effect */
 }
 
 .retrain {
-  background-color: #007bff;
+  background-color: #007bff; /* Blue color for retrain */
 }
 
 .retrain:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Darker blue on hover */
 }
 
 .delete {
-  background-color: #dc3545;
+  background-color: #dc3545; /* Red color for delete */
 }
 
 .delete:hover {
-  background-color: #c82333;
+  background-color: #c82333; /* Darker red on hover */
 }
 
 .active-model {
-  background-color: #e0f7e0; /* Màu xanh lá nhạt cho hàng có status 1 */
+  background-color: #e0f7e0; /* Light green for active models */
 }
 
 input[type="checkbox"] {
-  cursor: pointer;
-  accent-color: #28a745;
+  cursor: pointer; /* Pointer cursor for checkbox */
+  accent-color: #28a745; /* Green accent color for checkbox */
 }
