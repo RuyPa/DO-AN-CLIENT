@@ -204,8 +204,8 @@ const UpdateSample = () => {
         id: data.id ? parseInt(data.id.split('-')[1]) : undefined, // Preserve the ID if it exists
         centerX: parseFloat(data.centerX),
         centerY: parseFloat(data.centerY),
-        height: parseFloat(data.height),
-        width: parseFloat(data.width),
+        height: parseFloat(data.width),
+        width: parseFloat(data.height),
         traffic_sign_id: trafficSign ? trafficSign.id : null
       };
   

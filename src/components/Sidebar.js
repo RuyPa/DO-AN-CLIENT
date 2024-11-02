@@ -74,15 +74,6 @@ function Sidebar() {
             Train Model
           </Link>
         </li>
-
-        <li>
-          <Link
-            to="/updateSample/2"
-            className={location.pathname === '/updateSample/2' ? 'active' : ''}
-          >
-            Update Sample
-          </Link>
-        </li>
       </ul>
     </div>
   );

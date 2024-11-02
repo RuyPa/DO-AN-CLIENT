@@ -1,12 +1,26 @@
-.container {
+.model-container {
+  max-width: 100%;
+  
+  margin-left: 200px; /* Căn lề trái */
   display: flex;
   flex-direction: column;
-  height: 93vh; /* Container takes 93% of the viewport height */
-  padding: 0; /* Remove any padding for the main container */
+  height: 94vh; /* Container takes 93% of the viewport height */
   box-sizing: border-box; /* Include padding and border in element's total width and height */
+  padding-left: 20px;
 }
 
 h2 {
+  margin-top: 0; /* Remove top margin */
+  margin-bottom: 5px; /* Bottom margin for separation */
+}
+
+h4 {
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  unicode-bidi: isolate;
   margin-top: 0; /* Remove top margin */
   margin-bottom: 5px; /* Bottom margin for separation */
 }
@@ -47,9 +61,16 @@ h2 {
 }
 
 .model-table tr:hover {
-  background-color: #f1f1f1; /* Hover effect */
-  cursor: pointer; /* Change cursor */
+  cursor: pointer; /* Thay đổi con trỏ */
+  box-shadow: inset 0 0 0 0.5px #007bff; /* Viền màu xanh khi di chuột */
+  filter: brightness(95%); /* Giảm độ sáng một chút */
 }
+
+.selected-model {
+  cursor: pointer; /* Thay đổi con trỏ */
+  box-shadow: inset 0 0 0 0.5px #007bff; /* Viền màu xanh khi di chuột */
+}
+
 
 /* Sample List Section */
 .sample-list {
@@ -62,7 +83,7 @@ h2 {
 }
 
 .scrollable-sample-table {
-  height: 80%; /* Height of the sample table */
+  height: 70%;
   overflow-y: auto; /* Enable vertical scrolling */
   overflow-x: hidden; /* Disable horizontal scrolling */
 }
@@ -88,9 +109,11 @@ h2 {
 }
 
 .sample-table tr:hover {
-  background-color: #f1f1f1; /* Hover effect */
-  cursor: pointer; /* Change cursor */
+  cursor: pointer; /* Thay đổi con trỏ */
+  box-shadow: inset 0 0 0 0.5px #007bff; /* Viền màu xanh khi di chuột */
+  filter: brightness(95%); /* Giảm độ sáng một chút */
 }
+
 
 .no-content {
   color: #888; /* Gray color for no content */
@@ -134,3 +157,95 @@ input[type="checkbox"] {
   cursor: pointer; /* Pointer cursor for checkbox */
   accent-color: #28a745; /* Green accent color for checkbox */
 }
+
+.selected-sample {
+  background-color: #d4edda; /* Màu nền xanh nhạt khi được chọn */
+}
+.sample-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.btn-retrain {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-retrain:hover {
+  background-color: #0056b3;
+}
+
+.btn-retrain:active {
+  background-color: #004494;
+}
+.progress-container {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.progress-message {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 20px;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #4caf50; /* Màu xanh */
+  width: 0;
+  transition: width 0.3s ease; /* Hiệu ứng chạy mượt mà */
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 5px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.model-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-download {
+  background-color: #e74c3c;
+  color: white;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+}
+
+.btn-download:hover {
+  background-color: rgb(210, 4, 4);
+}
+
+
