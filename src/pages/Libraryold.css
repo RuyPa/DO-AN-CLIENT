@@ -5,20 +5,29 @@
 
 .library-container {
   margin-left: 200px; /* Tạo khoảng cách bằng với chiều rộng của sidebar */
-
   display: flex;
   justify-content: space-between;
   padding: 20px;
-  height: 100vh; /* Đảm bảo chiều cao chiếm toàn bộ màn hình */
+  padding-top: 0px;
+  height: 94vh;
+  overflow-y: auto;
+    
+  /* Hide scrollbar in modern browsers */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.library-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
 }
 
 .traffic-signs-grid {
-  width: 70%; /* Điều chỉnh phần danh sách ô chiếm 70% */
+  width: 70%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Tạo lưới với 4 ô trên một hàng */
-  grid-auto-rows: 350px; /* Tất cả các ô sẽ có chiều cao 200px */
-  gap: 15px; /* Khoảng cách giữa các ô */
-  margin-bottom: 20px;
+  grid-template-columns: repeat(4, 1fr); 
+  /* grid-auto-rows: 350px; */
+  gap: 15px;
+  padding-bottom: 50px; 
 }
 
 /* .traffic-sign-card {
@@ -32,6 +41,8 @@
 } */
 
 .traffic-sign-card {
+  aspect-ratio: 1 / 1.5; /* Set aspect ratio to 1:1.5 (width:height) */
+
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -92,6 +103,7 @@
   width: 21%;
   right: 1%;
   padding: 30px;
+  padding-top: 40px;
   border-left: 2px solid #eee; /* Create a subtle left border */
   display: flex;
   flex-direction: column;
@@ -101,8 +113,11 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   border-radius: 8px; /* Slightly rounded corners for a modern look */
   overflow: auto; /* Allows for scrolling if content exceeds the height */
-  height: calc(100vh - 40px); /* Keep the height dynamic based on the viewport height */
+  /* height: calc(100vh - 50px);  */
+  height: 89vh; 
   z-index: 10; /* Ensure it's on top of other content */
+  border-radius: 10px; /* Rounded corners */
+  border: 3px solid #e74c3c; /* Border color */
 }
 
 
@@ -133,7 +148,7 @@
 }
 
 .traffic-sign-details button {
-  padding: 10px 20px;
+  padding: 5px 10px;
   background-color: #007BFF; /* Màu xanh nổi bật, chuyên nghiệp */
   color: #fff;
   border: none;
@@ -186,19 +201,9 @@
 
 .add-sign-form-btn {
   position: fixed; /* Giữ nút luôn cố định trên màn hình */
-  top: 45px; /* Cách đáy màn hình 20px */
-  right:8px; /* Cách phải màn hình 20px */
-  background-color: #3498db;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 9999; /* Đảm bảo nút nằm trên tất cả các thành phần khác */
-  transition: background-color 0.3s, transform 0.3s;
-  margin-right: 40px ;
+  top: 30px; /* Cách đáy màn hình 20px */
+  right:5px; /* Cách phải màn hình 20px */
+  margin-right: 25px ;
 }
 
 .add-sign-form-btn:hover {
