@@ -1,334 +1,8 @@
-// // src/pages/Library.js
-// import React, { useEffect, useState } from 'react';
-// import './Libraryold.css';
-
-// function Library() {
-//   const [trafficSigns, setTrafficSigns] = useState([]);
-//   const [selectedSign, setSelectedSign] = useState(null); // Lưu trữ biển báo được chọn
-
-//   // Gọi API để lấy danh sách biển báo
-//   useEffect(() => {
-//     fetch('http://127.0.0.1:5000/api/traffic_signs')
-//       .then(response => response.json())
-//       .then(data => setTrafficSigns(data))
-//       .catch(error => console.error('Error fetching traffic signs:', error));
-//   }, []);
-
-//   // Gọi API để lấy chi tiết biển báo
-//   const handleSignClick = (id) => {
-//     fetch(`http://127.0.0.1:5000/api/traffic_signs/${id}`)
-//       .then(response => response.json())
-//       .then(data => setSelectedSign(data))
-//       .catch(error => console.error('Error fetching traffic sign details:', error));
-//   };
-
-//   return (
-//     <div className="library-container">
-//       <div className="traffic-signs-grid">
-//         {trafficSigns.map(sign => (
-//           <div key={sign.id} className="traffic-sign-card" onClick={() => handleSignClick(sign.id)}>
-//             <img src={sign.path} alt={sign.name} />
-//             <h3>{sign.name}</h3>
-//           </div>
-//         ))}
-//       </div>
-
-//       {/* Phần chi tiết biển báo */}
-//       {selectedSign && (
-//         <div className="traffic-sign-details">
-//           <h2>{selectedSign.name}</h2>
-//           <img src={selectedSign.path} alt={selectedSign.name} />
-//           <p><strong>Code:</strong> {selectedSign.code}</p>
-//           <p>{selectedSign.description}</p>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default Library;
-// import React, { useEffect, useState } from 'react';
-// import './Libraryold.css';
-
-// function Library() {
-//   const [trafficSigns, setTrafficSigns] = useState([]);
-//   const [selectedSign, setSelectedSign] = useState(null); // Lưu trữ biển báo được chọn
-//   const [showAddForm, setShowAddForm] = useState(false); // Hiển thị form thêm mới
-//   const [newSign, setNewSign] = useState({
-//     name: '',
-//     description: '',
-//     image: null
-//   });
-
-//   // Gọi API để lấy danh sách biển báo
-//   useEffect(() => {
-//     fetch('http://127.0.0.1:5000/api/traffic_signs')
-//       .then(response => response.json())
-//       .then(data => setTrafficSigns(data))
-//       .catch(error => console.error('Error fetching traffic signs:', error));
-//   }, []);
-
-//   // Gọi API để lấy chi tiết biển báo
-//   const handleSignClick = (id) => {
-//     fetch(`http://127.0.0.1:5000/api/traffic_signs/${id}`)
-//       .then(response => response.json())
-//       .then(data => setSelectedSign(data))
-//       .catch(error => console.error('Error fetching traffic sign details:', error));
-//   };
-
-//   // Tự động tạo mã code từ tên
-//   const generateCode = (name) => {
-//     return name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '_');
-//   };
-
-//   // Xử lý khi nhập tên
-//   const handleNameChange = (e) => {
-//     const name = e.target.value;
-//     const code = generateCode(name);
-//     setNewSign((prevSign) => ({
-//       ...prevSign,
-//       name,
-//       code
-//     }));
-//   };
-
-//   // Xử lý khi chọn file ảnh
-//   const handleFileChange = (e) => {
-//     setNewSign((prevSign) => ({
-//       ...prevSign,
-//       image: e.target.files[0]
-//     }));
-//   };
-
-//   // Gửi thông tin mới lên server bằng POST và cập nhật danh sách biển báo ngay lập tức
-//   const handleAddSign = () => {
-//     const formData = new FormData();
-//     formData.append('name', newSign.name);
-//     formData.append('code', generateCode(newSign.name));
-//     formData.append('description', newSign.description);
-//     formData.append('image', newSign.image);
-
-//     fetch('http://127.0.0.1:5000/api/traffic_signs', {
-//       method: 'POST',
-//       body: formData,
-//     })
-//       .then(response => response.json())
-//       .then(data => {
-//         alert('Traffic sign created successfully');
-//         // Cập nhật danh sách biển báo mà không cần tải lại trang
-//         setTrafficSigns(prevSigns => [...prevSigns, data]);
-//         setShowAddForm(false); // Ẩn form sau khi thêm thành công
-//       })
-//       .catch(error => console.error('Error creating traffic sign:', error));
-//   };
-
-//   return (
-//     <div className="library-container">
-//       <div className="traffic-signs-grid">
-//         {trafficSigns.map(sign => (
-//           <div key={sign.id} className="traffic-sign-card" onClick={() => handleSignClick(sign.id)}>
-//             <img src={sign.path} alt={sign.name} />
-//             <h3>{sign.name}</h3>
-//           </div>
-//         ))}
-//       </div>
-
-
-//       {/* Phần chi tiết biển báo */}
-//       <div className="traffic-sign-details">
-//         {selectedSign && !showAddForm && (
-//           <>
-//             <h2>{selectedSign.name}</h2>
-//             <img src={selectedSign.path} alt={selectedSign.name} />
-//             <p><strong>Code:</strong> {selectedSign.code}</p>
-//             <p>{selectedSign.description}</p>
-//           </>
-//         )}
-
-//         {/* Nút thêm biển báo mới */}
-//         <button className="add-sign-form-btn" onClick={() => setShowAddForm(!showAddForm)}>
-//           {showAddForm ? 'Cancel' : 'Add New Traffic Sign'}
-//         </button>
-
-//         {/* Form thêm biển báo mới (hiển thị khi showAddForm = true) */}
-//         {showAddForm && (
-//           <div className="add-sign-form">
-//             <h2>Add New Traffic Sign</h2>
-//             <label>Name:</label>
-//             <input type="text" value={newSign.name} onChange={handleNameChange} />
-
-//             <label>Description:</label>
-//             <textarea value={newSign.description} onChange={(e) => setNewSign((prevSign) => ({ ...prevSign, description: e.target.value }))} />
-
-//             <label>Image:</label>
-//             <input type="file" onChange={handleFileChange} />
-
-//             <button onClick={handleAddSign}>Submit</button>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Library;
-
-// import React, { useEffect, useState } from 'react';
-// import './Libraryold.css';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-
-// function Library() {
-//   const [trafficSigns, setTrafficSigns] = useState([]);
-//   const [selectedSign, setSelectedSign] = useState(null);
-//   const [showAddForm, setShowAddForm] = useState(false);
-//   const [newSign, setNewSign] = useState({
-//     name: '',
-//     description: '',
-//     image: null,
-//   });
-
-//   useEffect(() => {
-//     fetch('http://127.0.0.1:5000/api/traffic_signs')
-//       .then(response => response.json())
-//       .then(data => setTrafficSigns(data))
-//       .catch(error => console.error('Error fetching traffic signs:', error));
-//   }, []);
-
-//   const handleSignClick = (id) => {
-//     fetch(`http://127.0.0.1:5000/api/traffic_signs/${id}`)
-//       .then(response => response.json())
-//       .then(data => setSelectedSign(data))
-//       .catch(error => console.error('Error fetching traffic sign details:', error));
-//   };
-
-//   const generateCode = (name) => {
-//     return name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '_');
-//   };
-
-//   const handleNameChange = (e) => {
-//     const name = e.target.value;
-//     const code = generateCode(name);
-//     setNewSign((prevSign) => ({
-//       ...prevSign,
-//       name,
-//       code,
-//     }));
-//   };
-
-//   const handleFileChange = (e) => {
-//     setNewSign((prevSign) => ({
-//       ...prevSign,
-//       image: e.target.files[0],
-//     }));
-//   };
-
-//   const handleAddSign = () => {
-//     const formData = new FormData();
-//     formData.append('name', newSign.name);
-//     formData.append('code', generateCode(newSign.name));
-//     formData.append('description', newSign.description);
-//     formData.append('image', newSign.image);
-
-//     fetch('http://127.0.0.1:5000/api/traffic_signs', {
-//       method: 'POST',
-//       body: formData,
-//     })
-//       .then(response => response.json())
-//       .then(data => {
-//         alert('Traffic sign created successfully');
-//         setTrafficSigns(prevSigns => [...prevSigns, data]);
-//         setShowAddForm(false);
-//       })
-//       .catch(error => console.error('Error creating traffic sign:', error));
-//   };
-
-//   const handleDeleteSign = (id) => {
-//     fetch(`http://127.0.0.1:5000/api/traffic_signs/${id}`, {
-//       method: 'DELETE',
-//     })
-//       .then(() => {
-//         setTrafficSigns(prevSigns => prevSigns.filter(sign => sign.id !== id));
-//         alert('Traffic sign deleted successfully');
-//       })
-//       .catch(error => console.error('Error deleting traffic sign:', error));
-//   };
-
-//   const handleUpdateSign = (id) => {
-//     alert(`Update functionality for ID: ${id} is not implemented yet.`);
-//   };
-
-//   return (
-//     <div className="library-container">
-//       <div className="traffic-signs-grid">
-//         {trafficSigns.map(sign => (
-//           <div key={sign.id} className="traffic-sign-card" onClick={() => handleSignClick(sign.id)}>
-//             <img src={sign.path} alt={sign.name} />
-//             <h3>{sign.name}</h3>
-//             <div className="icon-container">
-//               <FontAwesomeIcon
-//                 icon={faEdit}
-//                 color="dodgerblue"
-//                 className="icon"
-//                 onClick={(e) => {
-//                   e.stopPropagation();
-//                   handleUpdateSign(sign.id);
-//                 }}
-//               />
-//               <FontAwesomeIcon
-//                 icon={faTrashAlt}
-//                 color="red"
-//                 className="icon"
-//                 onClick={(e) => {
-//                   e.stopPropagation();
-//                   handleDeleteSign(sign.id);
-//                 }}
-//               />
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-
-//       <div className="traffic-sign-details">
-//         {selectedSign && !showAddForm && (
-//           <>
-//             <h2>{selectedSign.name}</h2>
-//             <img src={selectedSign.path} alt={selectedSign.name} />
-//             <p><strong>Code:</strong> {selectedSign.code}</p>
-//             <p>{selectedSign.description}</p>
-//           </>
-//         )}
-
-//         <button className="add-sign-form-btn" onClick={() => setShowAddForm(!showAddForm)}>
-//           {showAddForm ? 'Cancel' : 'Add New Traffic Sign'}
-//         </button>
-
-//         {showAddForm && (
-//           <div className="add-sign-form">
-//             <h2>Add New Traffic Sign</h2>
-//             <label>Name:</label>
-//             <input type="text" value={newSign.name} onChange={handleNameChange} />
-
-//             <label>Description:</label>
-//             <textarea value={newSign.description} onChange={(e) => setNewSign((prevSign) => ({ ...prevSign, description: e.target.value }))} />
-
-//             <label>Image:</label>
-//             <input type="file" onChange={handleFileChange} />
-
-//             <button onClick={handleAddSign}>Submit</button>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Library;
-
 import React, { useEffect, useState } from 'react';
 import './Libraryold.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faSearch } from '@fortawesome/free-solid-svg-icons';
+
 
 function Library() {
   const [trafficSigns, setTrafficSigns] = useState([]);
@@ -341,15 +15,50 @@ function Library() {
     image: null,
   });
 
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const [debouncedKeyword, setDebouncedKeyword] = useState('');
+  const role = localStorage.getItem("role");
+
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/traffic_signs')
+    const handler = setTimeout(() => {
+      setDebouncedKeyword(searchKeyword);
+    }, 300); // 300ms delay to debounce
+  
+    return () => clearTimeout(handler);
+  }, [searchKeyword]);
+  
+  useEffect(() => {
+    const fetchTrafficSigns = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:5000/api/traffic_signs/search?keyword=${debouncedKeyword}&page=1&page_size=12`, {
+          credentials: 'include'
+          });
+        const data = await response.json();
+        setTrafficSigns(data.data || []); // Ensure `data` is properly handled
+      } catch (error) {
+        console.error('Error fetching traffic signs:', error);
+      }
+    };
+  
+    fetchTrafficSigns();
+  }, [debouncedKeyword]);
+  
+
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:5000/api/traffic_signs', {
+      credentials: 'include'
+      }
+    )
       .then(response => response.json())
       .then(data => setTrafficSigns(data))
       .catch(error => console.error('Error fetching traffic signs:', error));
   }, []);
 
   const handleSignClick = (id) => {
-    fetch(`http://127.0.0.1:5000/api/traffic_signs/${id}`)
+    fetch(`http://127.0.0.1:5000/api/traffic_signs/${id}`, {
+      credentials: 'include'
+      })
       .then(response => response.json())
       .then(data => {
         setSelectedSign(data);
@@ -386,6 +95,7 @@ function Library() {
     formData.append('image', newSign.image);
 
     fetch('http://127.0.0.1:5000/api/traffic_signs', {
+      credentials: 'include',  // Ensures cookies are included in the request
       method: 'POST',
       body: formData,
     })
@@ -404,6 +114,8 @@ function Library() {
     const confirmDelete = window.confirm("Are you sure you want to delete this traffic sign?");
     if (confirmDelete) {
       fetch(`http://127.0.0.1:5000/api/traffic_signs/${id}`, {
+
+        credentials: 'include',
         method: 'DELETE',
       })
         .then(() => {
@@ -440,6 +152,7 @@ function Library() {
     }
 
     fetch(`http://127.0.0.1:5000/api/traffic_signs/${id}`, {
+      credentials: 'include',
       method: 'PUT',
       body: formData,
     })
@@ -456,35 +169,55 @@ function Library() {
 
   return (
     <div className="library-container">
-      <div className="traffic-signs-grid">
-        {trafficSigns.map(sign => (
-          <div key={sign.id} className="traffic-sign-card" onClick={() => handleSignClick(sign.id)}>
-            <img src={sign.path} alt={sign.name} />
-            <h3>{sign.name}</h3>
-            <div className="icon-container">
-              <FontAwesomeIcon
-                icon={faEdit}
-                color="dodgerblue"
-                className="icon"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleUpdateSign(sign.id);
-                }}
-              />
-              <FontAwesomeIcon
-                icon={faTrashAlt}
-                color="red"
-                className="icon"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDeleteSign(sign.id);
-                }}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
+      <div className="traffic-signs-container">
 
+      <div className="upper-container"> {/* Container mới để kiểm soát layout */}
+
+        <div className="search-container">
+          <input
+            type="text"
+            value={searchKeyword}
+            onChange={(e) => setSearchKeyword(e.target.value)}
+            placeholder="Search traffic signs..."
+            className="search-input"
+          />
+          <FontAwesomeIcon icon={faSearch} className="search-icon" />
+        </div>
+        </div>
+
+          <div className="traffic-signs-grid">
+            {trafficSigns.map(sign => (
+              <div key={sign.id} className="traffic-sign-card" onClick={() => handleSignClick(sign.id)}>
+                <img src={sign.path} alt={sign.name} />
+                <h3>{sign.name}</h3>
+                <div className="icon-container">
+                {role === "admin" && (
+
+                  <FontAwesomeIcon
+                    icon={faEdit}
+                    color="dodgerblue"
+                    className="icon"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleUpdateSign(sign.id);
+                    }}
+                  /> )}
+                {role === "admin" && (
+
+                  <FontAwesomeIcon
+                    icon={faTrashAlt}
+                    color="red"
+                    className="icon"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteSign(sign.id);
+                    }}
+                  /> )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       <div className="traffic-sign-details">
         {selectedSign && !showAddForm && !showEditForm && (
           <>

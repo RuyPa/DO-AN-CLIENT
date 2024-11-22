@@ -20,7 +20,9 @@ const UpdateSample = () => {
 
   // Fetch traffic signs from API
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/traffic_signs')
+    fetch('http://127.0.0.1:5000/api/traffic_signs', {
+      credentials: 'include'  
+    })
       .then(response => response.json())
       .then(data => setTrafficSigns(data))
       .catch(error => console.error('Error fetching traffic signs:', error));
@@ -29,12 +31,16 @@ const UpdateSample = () => {
   // Fetch the existing sample data using the ID from the URL and fill form fields
   useEffect(() => {
     if (id) {
-      fetch(`http://127.0.0.1:5000/api/samples/${id}`)
+      fetch(`http://127.0.0.1:5000/api/samples/${id}`, {
+        credentials: 'include'  
+      })
         .then(response => response.json())
         .then(data => {
           setCode(data.code);
           setPath(data.path);
-          setImagePreviewUrl(`http://localhost:5000/get-file?path=${data.path.replaceAll('\\', '/')}`);
+          // setImagePreviewUrl(`http://localhost:5000/get-file?path=${data.path.replaceAll('\\', '/')}`);
+          setImagePreviewUrl(data.path);
+
           
           // Map the labels data to match the selectionData format and prefill fields
           const formattedLabels = data.labels.map((label, index) => ({
@@ -88,8 +94,9 @@ const UpdateSample = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         setImagePreviewUrl(e.target.result);
-        const fileName = file.name;
-        const fixedPath = `C:\\Users\\ruy_pa_\\OneDrive - ptit.edu.vn\\do_an_2024\\YOLO\\vn1\\train\\images\\${fileName}`;
+        // const fileName = file.name;
+        // const fixedPath = `C:\\Users\\ruy_pa_\\OneDrive - ptit.edu.vn\\do_an_2024\\YOLO\\vn1\\train\\images\\${fileName}`;
+        const fixedPath = file.path
         setPath(fixedPath);
       };
       reader.readAsDataURL(file);
@@ -227,6 +234,7 @@ const UpdateSample = () => {
   
     // Make the PUT request to the API
     fetch(`http://127.0.0.1:5000/api/samples/${id}`, {
+      credentials: 'include' ,
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

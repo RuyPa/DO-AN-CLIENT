@@ -55,16 +55,14 @@ function Sidebar() {
             Profile
           </Link>
         </li>
-        {(role === "admin") && (
-          <li>
-            <Link
-              to="/library"
-              className={location.pathname === '/library' ? 'active' : ''}
-            >
-              Library
-            </Link>
-          </li>
-        )}
+        <li>
+          <Link
+            to="/library"
+            className={location.pathname === '/library' ? 'active' : ''}
+          >
+            Library
+          </Link>
+        </li>
 
         <li>
           <Link

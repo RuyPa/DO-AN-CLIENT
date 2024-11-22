@@ -15,14 +15,18 @@ const Model = () => {
   const [loadingModelId, setLoadingModelId] = useState(null); // To track which model is loading
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/models')
+    fetch('http://127.0.0.1:5000/api/models', {
+      credentials: 'include'
+      })
       .then((response) => response.json())
       .then((data) => setModels(data))
       .catch((error) => console.error('Error fetching models:', error));
   }, []);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/samples')
+    fetch('http://127.0.0.1:5000/api/samples', {
+      credentials: 'include'
+      })
       .then((response) => response.json())
       .then((data) => setSamples(data))
       .catch((error) => console.error('Error fetching samples:', error));
@@ -30,6 +34,7 @@ const Model = () => {
 
   useEffect(() => {
     const socket = io('http://127.0.0.1:5000', {
+      credentials: 'include',
       transports: ['websocket', 'polling'],
     });
 
@@ -59,6 +64,7 @@ const Model = () => {
 
     try {
       const response = await fetch(`http://127.0.0.1:5000/api/models/${modelId}/set-active`, {
+        credentials: 'include',
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +72,9 @@ const Model = () => {
       });
 
       if (response.ok) {
-        const updatedModels = await fetch('http://127.0.0.1:5000/api/models')
+        const updatedModels = await fetch('http://127.0.0.1:5000/api/models', {
+          credentials: 'include'
+          })
           .then((res) => res.json());
         setModels(updatedModels);
       } else {
@@ -104,6 +112,7 @@ const Model = () => {
     };
 
     fetch('http://127.0.0.1:5000/api/retrain-model/14', {
+      credentials: 'include',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -125,6 +134,7 @@ const Model = () => {
 
     try {
       const response = await fetch(`http://127.0.0.1:5000/api/models/${modelId}`, {
+        credentials: 'include',
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -146,11 +156,30 @@ const Model = () => {
   const downloadActiveModel = () => {
     const activeModel = models.find((model) => model.status === '1');
     if (activeModel) {
-      window.location.href = `http://127.0.0.1:5000/api/models/${activeModel.id}/download`;
+      fetch(`http://127.0.0.1:5000/api/models/${activeModel.id}/download`, {
+        credentials: 'include'  
+      })
+      .then(response => {
+        if (response.ok) return response.blob();
+        throw new Error('Network response was not ok.');
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = activeModel.name || 'download'; // Use the model's name or provide a default
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        alert('Download has started.');
+      })
+      .catch(error => console.error('Download failed:', error));
     } else {
       alert('No active model found for download.');
     }
   };
+  
 
   return (
     <div className="model-container">
@@ -272,7 +301,8 @@ const Model = () => {
                       <td>{sample.name}</td>
                       <td>
                         <img
-                          src={`http://localhost:5000/get-file?path=${sample.path.replaceAll('\\', '/')}`}
+                          // src={`http://localhost:5000/get-file?path=${sample.path.replaceAll('\\', '/')}`}
+                          src={sample.path}
                           alt={sample.name}
                           style={{ width: '100px' }}
                         />

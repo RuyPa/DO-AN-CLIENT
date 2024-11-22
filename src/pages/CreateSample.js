@@ -19,7 +19,9 @@ const CreateSample = () => {
 
   // Gọi API lấy dữ liệu traffic signs
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/traffic_signs')
+    fetch('http://127.0.0.1:5000/api/traffic_signs', {
+      credentials: 'include'  
+    })
       .then(response => response.json())
       .then(data => setTrafficSigns(data))
       .catch(error => console.error('Error fetching traffic signs:', error));
@@ -169,6 +171,7 @@ const CreateSample = () => {
   
     // Gửi POST request đến API
     fetch('http://127.0.0.1:5000/api/samples', {
+        credentials: 'include'  ,
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

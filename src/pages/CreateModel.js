@@ -30,7 +30,9 @@ const CreateModel = () => {
     }
 
     // Gọi API lấy danh sách các mẫu
-    fetch('http://127.0.0.1:5000/api/samples')
+    fetch('http://127.0.0.1:5000/api/samples', {
+      credentials: 'include'  
+    })
       .then(response => response.json())
       .then(data => {
         setSamples(data);
@@ -55,6 +57,8 @@ const CreateModel = () => {
 
   const startModelCreation = () => {
     fetch('http://localhost:5000/api/start-model', {
+  
+      credentials: 'include',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

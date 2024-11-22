@@ -3,21 +3,16 @@
       max-width: 100%;
   
     margin-left: 200px; /* Căn lề trái */
-    padding: 20px;
+    padding: 20px;  
+    overflow-y: auto; /* Allows vertical scrolling if content overflows */
+    height: calc(100vh - 40px); /* Example: Full viewport height minus any other UI components height */
   }
-  
-  /* #image-container {
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    margin-top: 20px;
-    border: 1px solid #ccc;
-  } */
 
   #image-container {
     width: 100%;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
+
     margin-top: 20px;
     border: 1px solid #ccc;
     min-height: 500px; /* Đặt chiều cao tối thiểu cho container ảnh */
@@ -54,32 +49,20 @@
     border-radius: 3px;
   }
   
-  /* .selected-area {
-    position: absolute;
-    background-color: rgba(0, 123, 255, 0.5);
-    pointer-events: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
-  
   .selected-area span {
     color: #fff;
     font-size: 12px;
     font-weight: bold;
   }
   
-  /* .table-container {
-    width: 100%;
-    margin-top: 20px;
-    overflow-x: auto;
-  } */
   
   .table-container {
     width: 100%;
     margin-top: 20px;
     overflow-x: auto;
-    min-height: 500px; /* Đặt chiều cao tối thiểu cho container bảng */
+    overflow-y: auto;
+
+    min-height: 300px; /* Đặt chiều cao tối thiểu cho container bảng */
 }
 
   .table {
@@ -115,12 +98,6 @@
     white-space: normal; /* Khi di chuột vào, cho phép xuống dòng */
   }
   
-  
-  
-  
-  
-  
-  
   .input-container {
     margin-bottom: 20px; /* Tạo khoảng cách giữa các trường nhập */
   }
@@ -151,19 +128,6 @@
     color: #555;
   }
   
-  /* #image-container {
-    margin-top: 20px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-  } */
-  
-  /* #image-container img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  } */
   .btn-secondary {
     width: 10%;
     background-color: #6c757d; /* Màu nền xám */
@@ -232,3 +196,6 @@
     box-shadow: none; /* Bỏ hiệu ứng đổ bóng khi nhấn */
   }
   
+  .btn-sm{
+    background-color:red;
+  }

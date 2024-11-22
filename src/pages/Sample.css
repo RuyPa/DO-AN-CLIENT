@@ -2,7 +2,7 @@
   display: flex;
   padding: 20px;
   padding-right: 0;
-  height: 100vh;
+  height: 96vh;
   margin-left: 200px; /* Tạo khoảng cách bằng với chiều rộng của sidebar */
 
 }
@@ -13,6 +13,7 @@
   flex-direction: column; /* Các ảnh xếp dọc */
   gap: 15px;
   overflow-y: auto; /* Thêm scroll nếu nhiều ảnh */
+  height: 94vh;
 }
 
 .sample-card {
@@ -22,12 +23,12 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  /* transition: transform 0.2s ease; */
 }
 
-.sample-card:hover {
+/* .sample-card:hover {
   transform: scale(1.05);
-}
+} */
 
 .sample-card img {
   width: 100%; /* Giữ kích thước cố định cho ảnh trong card */
@@ -57,6 +58,8 @@
   background-color: #f5f5f5; /* Màu nền nhẹ tạo sự tương phản cho bảng */
   border-radius: 8px; /* Bo góc container */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ để bảng nổi bật hơn */
+  overflow-y: auto; /* Allows vertical scrolling if content overflows */
+  padding-bottom: 20px;
 }
 
 .label-table {

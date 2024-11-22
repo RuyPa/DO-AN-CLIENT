@@ -81,10 +81,11 @@ function App() {
                 <Route path="/sample" element={<Sample />} />
                 <Route path="/createSample" element={<CreateSample />} />
                 <Route path="/updateSample/:id" element={<UpdateSample />} />
+                <Route path="/library" element={<Library />} />
+
 
                 {role === "admin" && (
                     <>
-                        <Route path="/library" element={<Library />} />
                         <Route path="/createModel" element={<CreateModel />} />
                         <Route path="/model" element={<Model />} />
 

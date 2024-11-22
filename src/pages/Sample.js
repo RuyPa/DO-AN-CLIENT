@@ -12,7 +12,9 @@ const Sample = () => {
 
   // Fetch list of samples from the API
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/samples')
+    fetch('http://127.0.0.1:5000/api/samples', {
+      credentials: 'include'  
+    })
       .then((response) => response.json())
       .then((data) => setSamples(data))
       .catch((error) => console.error('Error fetching samples:', error));
@@ -20,7 +22,9 @@ const Sample = () => {
 
   // Fetch details of a sample by ID when a sample is clicked
   const handleSampleClick = (id) => {
-    fetch(`http://127.0.0.1:5000/api/samples/${id}`)
+    fetch(`http://127.0.0.1:5000/api/samples/${id}`, {
+      credentials: 'include'  
+    })
       .then((response) => response.json())
       .then((data) => setSelectedSample(data))
       .catch((error) => console.error('Error fetching sample details:', error));
@@ -33,8 +37,8 @@ const Sample = () => {
       const ctx = canvas.getContext('2d');
       const img = new Image();
 
-      img.src = `http://localhost:5000/get-file?path=${selectedSample.path.replaceAll('\\', '/')}`;
-
+      // img.src = `http://localhost:5000/get-file?path=${selectedSample.path.replaceAll('\\', '/')}`;
+      img.src = selectedSample.path
       img.onload = () => {
         canvas.width = img.width;
         canvas.height = img.height;
@@ -74,6 +78,7 @@ const Sample = () => {
   const handleDeleteSample = (id) => {
     if (window.confirm("Are you sure you want to delete this sample?")) {
       fetch(`http://127.0.0.1:5000/api/samples/${id}`, {
+        credentials: 'include'  ,
         method: 'DELETE'
       })
         .then(() => setSamples(samples.filter((sample) => sample.id !== id)))
@@ -89,7 +94,8 @@ const Sample = () => {
           <h2>Name: {selectedSample.name}</h2>
           <p><strong>Code:</strong> {selectedSample.code}</p>
           <img
-            src={`http://localhost:5000/get-file?path=${selectedSample.path.replaceAll('\\', '/')}`}
+            // src={`http://localhost:5000/get-file?path=${selectedSample.path.replaceAll('\\', '/')}`}
+            src={selectedSample.path}
             alt={selectedSample.name}
             style={{ display: 'none' }}
           />
@@ -152,7 +158,8 @@ const Sample = () => {
             onClick={() => handleSampleClick(sample.id)}
           >
             <img
-              src={`http://localhost:5000/get-file?path=${sample.path.replaceAll('\\', '/')}`}
+              // src={`http://localhost:5000/get-file?path=${sample.path.replaceAll('\\', '/')}`}
+              src={sample.path}
               alt={sample.name}
             />
             <div className="sample-actions">
