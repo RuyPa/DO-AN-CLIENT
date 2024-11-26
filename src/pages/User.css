@@ -1,0 +1,139 @@
+.user-list-container {
+    padding: 20px;
+    padding-top: 0px;
+    font-family: Arial, sans-serif;
+    margin-left: 220px;
+    height: 46vh; /* Chiều cao container */
+    border-radius: 10px; /* Rounded corners */
+    border: 3px solid #e76969; /* Border color */
+  }
+  
+  .add-user-button:hover {
+    background-color: #d9534f; /* Màu đậm hơn khi hover */
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center; /* Căn giữa nội dung trong các cột */
+    max-width: 200px; /* Giới hạn chiều rộng của các cột */
+    overflow: hidden; /* Ẩn phần dữ liệu bị vượt quá */
+    text-overflow: ellipsis; /* Hiển thị "..." khi nội dung bị tràn */
+    white-space: nowrap; /* Ngăn nội dung xuống dòng */
+  }
+  
+  table td {
+    position: relative; /* Gốc định vị cho tooltip */
+
+  }
+  
+  table td:hover {
+    cursor: pointer; /* Đổi con trỏ chuột khi hover */
+  }
+  
+  table td:hover::after {
+    content: attr(data-tooltip); /* Lấy dữ liệu từ thuộc tính data-tooltip */
+    position: fixed; /* Định vị cố định trong viewport */
+    left: var(--mouse-x); /* Dùng biến custom cập nhật vị trí con trỏ */
+    top: var(--mouse-y); 
+    background-color: #333; /* Màu nền tooltip */
+    color: white; /* Màu chữ */
+    padding: 5px; /* Khoảng cách nội dung bên trong tooltip */
+    border-radius: 4px; /* Bo tròn góc */
+    font-size: 14px;
+    z-index: 1000; /* Đảm bảo tooltip luôn trên cùng */
+    pointer-events: none; /* Tránh ảnh hưởng đến sự kiện chuột */
+    white-space: nowrap; /* Ngăn tooltip bị xuống dòng */
+  }
+  
+  table td:hover::before {
+    content: ''; /* Loại bỏ bất kỳ tác động nào có thể ảnh hưởng đến kích thước */
+    position: static; /* Không can thiệp vào layout của bảng */
+  }
+  
+  
+  
+  
+  
+  
+  .pagination-controls {
+    display: flex;
+    justify-content: flex-end; /* Căn toàn bộ sang phải */
+    align-items: center;
+    margin-top: 15px;
+    gap: 20px; /* Khoảng cách giữa các thành phần */
+    padding: 10px;
+    border-radius: 5px; /* Góc bo tròn */
+  }
+  
+  .page-size-selector {
+    display: flex;
+    align-items: center;
+  }
+  
+  .page-size-selector label {
+    margin-right: 10px;
+    font-size: 14px;
+    color: #555; /* Màu chữ nhã nhặn */
+  }
+  
+  .page-size-selector select {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .page-size-selector select:hover {
+    border-color: #e74c3c; /* Đổi màu viền khi hover */
+    background-color: #eef6ff; /* Màu nền khi hover */
+  }
+  
+  .pagination-info {
+    font-size: 14px;
+    text-align: right; /* Căn văn bản sang phải */
+    color: #333;
+  }
+  
+  .pagination-buttons {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .pagination-buttons button {
+    border: 1px solid #e74c3c; /* Màu viền chính */
+    background-color: #e74c3c; /* Nền xanh */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .pagination-buttons button:disabled {
+    background-color: #ccc;
+    border-color: #ccc;
+    color: #fff;
+    cursor: not-allowed;
+  }
+  
+  .pagination-buttons button:not(:disabled):hover {
+    background-color: #e74c3c; /* Nền đậm hơn khi hover */
+    border-color: #e74c3c; /* Viền đậm hơn khi hover */
+  }
+  
+  .pagination-buttons button:focus {
+    outline: none;
+    box-shadow: #e74c3c
+  }
+  
+  

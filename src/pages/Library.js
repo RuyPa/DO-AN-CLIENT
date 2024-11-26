@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Libraryold.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { API_VPS } from '../constant/constants';
 
 
 function Library() {
@@ -9,12 +10,14 @@ function Library() {
   const [selectedSign, setSelectedSign] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
+  const token = localStorage.getItem('accessToken');
   const [newSign, setNewSign] = useState({
     name: '',
     description: '',
     image: null,
   });
 
+  const URL = API_VPS
   const [searchKeyword, setSearchKeyword] = useState('');
   const [debouncedKeyword, setDebouncedKeyword] = useState('');
   const role = localStorage.getItem("role");
@@ -30,8 +33,12 @@ function Library() {
   useEffect(() => {
     const fetchTrafficSigns = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/api/traffic_signs/search?keyword=${debouncedKeyword}&page=1&page_size=12`, {
-          credentials: 'include'
+        const response = await fetch(`${URL}/api/traffic_signs/search?keyword=${debouncedKeyword}&page=1&page_size=12`, {
+          credentials: 'include',
+          headers: {
+            'Authorization': `Bearer ${token}`, // Gắn JWT vào header
+            'Accept': 'application/json', // Chỉ định kiểu dữ liệu mong muốn
+          },
           });
         const data = await response.json();
         setTrafficSigns(data.data || []); // Ensure `data` is properly handled
@@ -41,31 +48,64 @@ function Library() {
     };
   
     fetchTrafficSigns();
-  }, [debouncedKeyword]);
-  
-
+  }, [debouncedKeyword, URL, token]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/traffic_signs', {
-      credentials: 'include'
-      }
-    )
-      .then(response => response.json())
-      .then(data => setTrafficSigns(data))
-      .catch(error => console.error('Error fetching traffic signs:', error));
-  }, []);
+      // Lấy JWT từ localStorage
+
+      fetch(`${API_VPS}/api/traffic_signs`, {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}`, // Gắn JWT vào header
+              'Accept': 'application/json', // Chỉ định kiểu dữ liệu mong muốn
+          },
+      })
+      .then((response) => {
+          if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+      })
+      .then((data) => setTrafficSigns(data))
+      .catch((error) => console.error('Error fetching traffic signs:', error));
+  }, [token]);
+
+  // const handleSignClick = (id) => {
+  //   fetch(`${URL}/api/traffic_signs/${id}`, {
+  //     credentials: 'include'
+  //     })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setSelectedSign(data);
+  //       setShowEditForm(false); // Hide edit form when selecting a sign
+  //     })
+  //     .catch(error => console.error('Error fetching traffic sign details:', error));
+  // };
 
   const handleSignClick = (id) => {
-    fetch(`http://127.0.0.1:5000/api/traffic_signs/${id}`, {
-      credentials: 'include'
-      })
-      .then(response => response.json())
-      .then(data => {
+    // Lấy JWT từ localStorage
+    const token = localStorage.getItem('accessToken');
+
+    fetch(`${URL}/api/traffic_signs/${id}`, {
+        method: 'GET', // Phương thức yêu cầu GET
+        headers: {
+            'Authorization': `Bearer ${token}`, // Gắn JWT vào header
+            'Accept': 'application/json', // Chỉ định kiểu dữ liệu mong muốn
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
         setSelectedSign(data);
         setShowEditForm(false); // Hide edit form when selecting a sign
-      })
-      .catch(error => console.error('Error fetching traffic sign details:', error));
-  };
+    })
+    .catch(error => console.error('Error fetching traffic sign details:', error));
+};
+
 
   const generateCode = (name) => {
     return name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '_');
@@ -94,9 +134,13 @@ function Library() {
     formData.append('description', newSign.description);
     formData.append('image', newSign.image);
 
-    fetch('http://127.0.0.1:5000/api/traffic_signs', {
+    fetch(`${URL}/api/traffic_signs`, {
       credentials: 'include',  // Ensures cookies are included in the request
       method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`, // Gắn JWT vào header
+        'Accept': 'application/json', // Chỉ định kiểu dữ liệu mong muốn
+      },
       body: formData,
     })
       .then(response => response.json())
@@ -113,8 +157,11 @@ function Library() {
   const handleDeleteSign = (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this traffic sign?");
     if (confirmDelete) {
-      fetch(`http://127.0.0.1:5000/api/traffic_signs/${id}`, {
-
+      fetch(`${URL}/api/traffic_signs/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`, // Gắn JWT vào header
+          'Accept': 'application/json', // Chỉ định kiểu dữ liệu mong muốn
+        },
         credentials: 'include',
         method: 'DELETE',
       })
@@ -151,8 +198,12 @@ function Library() {
       formData.append('image', newSign.image);
     }
 
-    fetch(`http://127.0.0.1:5000/api/traffic_signs/${id}`, {
+    fetch(`${URL}/api/traffic_signs/${id}`, {
       credentials: 'include',
+      headers: {
+        'Authorization': `Bearer ${token}`, // Gắn JWT vào header
+        'Accept': 'application/json', // Chỉ định kiểu dữ liệu mong muốn
+      },
       method: 'PUT',
       body: formData,
     })

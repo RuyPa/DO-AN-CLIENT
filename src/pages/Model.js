@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 import './Model.css';
+import { API_VPS } from '../constant/constants';
 
 const Model = () => {
   const [models, setModels] = useState([]);
@@ -8,6 +9,8 @@ const Model = () => {
   const [selectedModel, setSelectedModel] = useState(null);
   const [tempSelectedSamples, setTempSelectedSamples] = useState([]);
   const [showRetrainButton, setShowRetrainButton] = useState(false);
+  const URL = API_VPS
+  const token = localStorage.getItem('accessToken');
 
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState('Waiting for retrain progress...');
@@ -15,22 +18,30 @@ const Model = () => {
   const [loadingModelId, setLoadingModelId] = useState(null); // To track which model is loading
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/models', {
-      credentials: 'include'
+    fetch(URL + '/api/models', {
+      credentials: 'include',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+      },
       })
       .then((response) => response.json())
       .then((data) => setModels(data))
       .catch((error) => console.error('Error fetching models:', error));
-  }, []);
+  }, [URL, token]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/samples', {
-      credentials: 'include'
+    fetch(URL + '/api/samples', {
+      credentials: 'include',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+      },
       })
       .then((response) => response.json())
       .then((data) => setSamples(data))
       .catch((error) => console.error('Error fetching samples:', error));
-  }, []);
+  }, [URL, token]);
 
   useEffect(() => {
     const socket = io('http://127.0.0.1:5000', {
@@ -63,17 +74,22 @@ const Model = () => {
     setLoadingModelId(modelId); // Show loading spinner for model being processed
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/api/models/${modelId}/set-active`, {
+      const response = await fetch(`${URL}/api/models/${modelId}/set-active`, {
         credentials: 'include',
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json',
         },
       });
 
       if (response.ok) {
-        const updatedModels = await fetch('http://127.0.0.1:5000/api/models', {
-          credentials: 'include'
+        const updatedModels = await fetch(`${URL}/api/models`, {
+          credentials: 'include',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json',
+          },
           })
           .then((res) => res.json());
         setModels(updatedModels);
@@ -133,11 +149,12 @@ const Model = () => {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/api/models/${modelId}`, {
+      const response = await fetch(`${URL}/api/models/${modelId}`, {
         credentials: 'include',
         method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json',
         },
       });
 
@@ -156,8 +173,12 @@ const Model = () => {
   const downloadActiveModel = () => {
     const activeModel = models.find((model) => model.status === '1');
     if (activeModel) {
-      fetch(`http://127.0.0.1:5000/api/models/${activeModel.id}/download`, {
-        credentials: 'include'  
+      fetch(`${URL}/api/models/${activeModel.id}/download`, {
+        credentials: 'include',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json',
+        },  
       })
       .then(response => {
         if (response.ok) return response.blob();

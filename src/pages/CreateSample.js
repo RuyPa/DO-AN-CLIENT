@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './CreateSample.css';
+import { API_VPS } from '../constant/constants';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate để điều hướng
 
 
@@ -15,17 +16,17 @@ const CreateSample = () => {
   const [startPoint, setStartPoint] = useState({ x: 0, y: 0 });
 
   const navigate = useNavigate(); // Sử dụng để điều hướng về lại trang danh sách sample
-
+  const URL = API_VPS
 
   // Gọi API lấy dữ liệu traffic signs
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/traffic_signs', {
+    fetch(URL + '/api/traffic_signs', {
       credentials: 'include'  
     })
       .then(response => response.json())
       .then(data => setTrafficSigns(data))
       .catch(error => console.error('Error fetching traffic signs:', error));
-  }, []);
+  }, [URL]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -170,7 +171,7 @@ const CreateSample = () => {
     };
   
     // Gửi POST request đến API
-    fetch('http://127.0.0.1:5000/api/samples', {
+    fetch(`${URL}/api/samples`, {
         credentials: 'include'  ,
       method: 'POST',
       headers: {

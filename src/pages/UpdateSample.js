@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './UpdateSample.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import { API_VPS } from '../constant/constants';
 
 const UpdateSample = () => {
   const { id } = useParams(); // Get the sample ID from the URL
@@ -20,7 +21,7 @@ const UpdateSample = () => {
 
   // Fetch traffic signs from API
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/traffic_signs', {
+    fetch(API_VPS + '/api/traffic_signs', {
       credentials: 'include'  
     })
       .then(response => response.json())
@@ -31,7 +32,7 @@ const UpdateSample = () => {
   // Fetch the existing sample data using the ID from the URL and fill form fields
   useEffect(() => {
     if (id) {
-      fetch(`http://127.0.0.1:5000/api/samples/${id}`, {
+      fetch(API_VPS + '/api/samples/${id}', {
         credentials: 'include'  
       })
         .then(response => response.json())
@@ -233,7 +234,7 @@ const UpdateSample = () => {
     };
   
     // Make the PUT request to the API
-    fetch(`http://127.0.0.1:5000/api/samples/${id}`, {
+    fetch(API_VPS + '/api/samples/${id}', {
       credentials: 'include' ,
       method: 'PUT',
       headers: {

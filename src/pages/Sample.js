@@ -3,27 +3,38 @@ import './Sample.css'; // Import CSS file
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesome component
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'; // Import specific icons
 import { useNavigate } from 'react-router-dom';
+import { API_VPS, API_BASE_URL } from '../constant/constants';
 
 const Sample = () => {
   const [samples, setSamples] = useState([]);
   const [selectedSample, setSelectedSample] = useState(null);
   const canvasRef = useRef(null);
   const navigate = useNavigate(); // Use navigate for redirection
+  const token = localStorage.getItem('accessToken');
+  const URL = API_BASE_URL;
 
   // Fetch list of samples from the API
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/samples', {
-      credentials: 'include'  
+    fetch(URL + '/api/samples', {
+      credentials: 'include',
+      headers: {
+        'Authorization': `Bearer ${token}`, // Gắn JWT vào header
+        'Accept': 'application/json', // Chỉ định kiểu dữ liệu mong muốn
+      },  
     })
       .then((response) => response.json())
       .then((data) => setSamples(data))
       .catch((error) => console.error('Error fetching samples:', error));
-  }, []);
+  }, [token, URL]);
 
   // Fetch details of a sample by ID when a sample is clicked
   const handleSampleClick = (id) => {
-    fetch(`http://127.0.0.1:5000/api/samples/${id}`, {
-      credentials: 'include'  
+    fetch(`${API_VPS}/api/samples/${id}`, {
+      credentials: 'include',
+      headers: {
+        'Authorization': `Bearer ${token}`, // Gắn JWT vào header
+        'Accept': 'application/json', // Chỉ định kiểu dữ liệu mong muốn
+      },  
     })
       .then((response) => response.json())
       .then((data) => setSelectedSample(data))
@@ -77,9 +88,13 @@ const Sample = () => {
   // Delete sample with confirmation
   const handleDeleteSample = (id) => {
     if (window.confirm("Are you sure you want to delete this sample?")) {
-      fetch(`http://127.0.0.1:5000/api/samples/${id}`, {
+      fetch(`${API_VPS}/api/samples/${id}`, {
         credentials: 'include'  ,
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`, // Gắn JWT vào header
+          'Accept': 'application/json', // Chỉ định kiểu dữ liệu mong muốn
+        },
       })
         .then(() => setSamples(samples.filter((sample) => sample.id !== id)))
         .catch((error) => console.error('Error deleting sample:', error));

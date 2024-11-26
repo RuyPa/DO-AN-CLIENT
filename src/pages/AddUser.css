@@ -1,0 +1,127 @@
+.add-user-container {
+    margin-left: 240px; /* Khoảng cách cố định từ mép trái */
+    width: calc(100% - 305px); /* Chiếm toàn bộ phần còn lại của màn hình trừ 220px */
+    height: 35vh; /* Chiều cao container */
+    border-top: 1px solid #ddd; /* Viền trên nhẹ */
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng phía trên */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Nội dung form nằm đầu container */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px; /* Góc bo tròn */
+    border: 3px solid #e76969; /* Màu viền */
+    position: fixed; /* Đặt container ở vị trí cố định */
+    bottom: 0; /* Đưa container xuống đáy màn hình */
+    left: 0; /* Đảm bảo container bắt đầu từ mép trái */
+  }
+  .add-user-tag {
+    position: absolute; /* Định vị tag trong container */
+    top: -30px; /* Đưa tag lên trên container */
+    right: -3px; /* Căn tag sát mép phải của container */
+    background-color: #9e5353; /* Màu nền đỏ nhạt */
+    color: white; /* Màu chữ trắng */
+    font-size: 14px; /* Kích thước chữ */
+    padding: 5px 15px; /* Khoảng cách nội dung trong tag */
+    border-radius: 15px; /* Góc bo tròn cho tag */
+    font-weight: bold; /* Chữ in đậm */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+    cursor: pointer;  /* Hiển thị con trỏ tay khi di chuột vào */
+    transition: background-color 0.2s ease; /* Thêm hiệu ứng chuyển màu mượt mà */
+  }
+  
+  .add-user-tag:hover {
+    background-color: #e76969; /* Màu khi hover */
+    text-decoration: none;  /* Bỏ gạch chân khi hover */
+  }
+  
+  .add-user-tag.clicked {
+    background-color: #e76969; /* Màu khi nhấn */
+  }
+  
+
+  h2{
+    padding-bottom: 10px;
+  }
+  
+ 
+  .form-group-row {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép các trường tự xuống dòng nếu không đủ không gian */
+    gap: 15px; /* Khoảng cách giữa các trường */
+    margin-bottom: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    align-items: center; /* Căn giữa nội dung hàng ngang */
+    gap: 10px; /* Khoảng cách giữa label và input */
+    flex: 1; /* Các trường chia đều không gian */
+    min-width: 150px; /* Độ rộng tối thiểu để giữ form đẹp */
+  }
+  
+  .form-group label {
+    flex: 0 0 100px; /* Độ rộng cố định cho nhãn để các nhãn thẳng hàng */
+    font-weight: bold;
+    margin-bottom: 0; /* Không cần khoảng cách dưới nhãn */
+  }
+  
+  .form-group input,
+  .form-group select {
+    flex: 1; /* Input hoặc select chiếm phần còn lại */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .password-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-container input {
+    flex: 1; /* Input chiếm toàn bộ không gian */
+  }
+  
+  .toggle-password {
+    margin-left: 10px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  
+  .button-login {
+    display: block;
+    width: 10%; /* Nút chiếm toàn bộ chiều rộng */
+    padding: 10px;
+    background-color: #2db444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-login:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+  
+  .button-login:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  .success-message {
+    color: green;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+  }
+  

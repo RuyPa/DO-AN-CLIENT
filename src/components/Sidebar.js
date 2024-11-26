@@ -4,7 +4,7 @@ import './Sidebar.css';
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons'; // Import Font Awesome icon
-
+import { API_VPS } from '../constant/constants';
 
 function Sidebar() {
   const location = useLocation();
@@ -15,25 +15,54 @@ function Sidebar() {
   // State to control the drop-up menu
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleLogout = async () => {
-    try {
-      const response = await fetch('http://127.0.0.1:5000/logout', {
-        method: 'GET',
-        credentials: 'include', // For cookies in session-based auth
-      });
+  // const handleLogout = async () => {
+  //   try {
+  //     const response = await fetch(API_VPS + '/logout', {
+  //       method: 'GET',
+  //       credentials: 'include', // For cookies in session-based auth
+  //     });
   
-      if (response.ok) {
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("role");
-        localStorage.removeItem("name");
-        navigate('/login');
-      } else {
-        console.error('Logout failed.');
+  //     if (response.ok) {
+  //       localStorage.removeItem("isLoggedIn");
+  //       localStorage.removeItem("role");
+  //       localStorage.removeItem("name");
+  //       navigate('/login');
+  //     } else {
+  //       console.error('Logout failed.');
+  //     }
+  //   } catch (error) {
+  //     console.error('An error occurred during logout:', error);
+  //   }
+  // };
+
+  const handleLogout = async () => {
+      try {
+          const response = await fetch(`${API_VPS}/logout`, {
+              method: 'POST', // Sử dụng POST thay vì GET vì logout thường thay đổi trạng thái (thực hiện hành động).
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              credentials: 'include', // Đảm bảo gửi cookie nếu có.
+          });
+
+          if (response.ok) {
+              // Xóa tất cả thông tin trong localStorage
+              localStorage.removeItem('accessToken');
+              localStorage.removeItem('refreshToken');
+              localStorage.removeItem('isLoggedIn');
+              localStorage.removeItem('role');
+              localStorage.removeItem('name');
+
+              // Điều hướng đến trang login
+              navigate('/login');
+          } else {
+              console.error('Logout failed.');
+          }
+      } catch (error) {
+          console.error('An error occurred during logout:', error);
       }
-    } catch (error) {
-      console.error('An error occurred during logout:', error);
-    }
   };
+
   
 
   return (
@@ -80,6 +109,17 @@ function Sidebar() {
               className={location.pathname === '/model' ? 'active' : ''}
             >
               Model
+            </Link>
+          </li>
+        )}
+
+        {(role === "admin") && (
+          <li>
+            <Link
+              to="/user"
+              className={location.pathname === '/user' ? 'active' : ''}
+            >
+              User Manage
             </Link>
           </li>
         )}
