@@ -4,12 +4,13 @@
 .library-container {
   margin-left: 200px; /* Tạo khoảng cách bằng với chiều rộng của sidebar */
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   padding: 20px;
   padding-top: 0px;
   height: 94vh;
   overflow-y: auto;
-    
+  flex-direction: column; /* Đảm bảo các phần tử con sắp xếp theo chiều dọc */
+
   /* Hide scrollbar in modern browsers */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -30,7 +31,7 @@
 
 
 .traffic-sign-card {
-  aspect-ratio: 1 / 1.5; /* Set aspect ratio to 1:1.5 (width:height) */
+  aspect-ratio: 1 / 1.5; 
 
   padding: 10px;
   border: 1px solid #ddd;
@@ -40,8 +41,8 @@
   cursor: pointer;
   transition: transform 0.2s ease;
   display: flex;
-  flex-direction: column; /* Sắp xếp các phần tử theo cột */
-  justify-content: space-between; /* Đẩy các icon xuống cuối */
+  flex-direction: column; 
+  justify-content: space-between; 
 }
 
 .traffic-sign-card:hover {
@@ -58,12 +59,105 @@
   margin-top: 10px;
   font-size: 16px;
 }
+/* testttt */
+.traffic-signs-container {
+  width: 99.5%;
+  padding: 20px;
+  box-sizing: border-box;
+}
 
+.traffic-signs-grid {
+  display: grid;
+  grid-template-columns: repeat(1,4); /* Tạo các cột tự động, tối thiểu là 220px */
+  grid-auto-rows: auto; /* Đảm bảo chiều cao các hàng tự động thay đổi */
+  gap: 35px; /* Khoảng cách giữa các phần tử */
+  justify-items: center; /* Căn giữa các phần tử trong mỗi ô */
+  align-items: start; /* Căn phần tử lên trên cùng */
+  margin-top: 20px;
+}
+.pagination-container {
+  text-align: left; /* Căn phần pagination-container sang trái */
+  flex: 1; /* Chiếm hết không gian có sẵn để phân bố các phần tử */
+}
+.traffic-sign-card {
+  width: 100%; /* Thẻ chiếm 100% chiều rộng của cột */
+  max-width: 250px; /* Giới hạn chiều rộng tối đa của thẻ */
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 8px; /* Bo góc */
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ cho thẻ */
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+}
+
+.traffic-sign-card:hover {
+  transform: translateY(-5px); /* Hiệu ứng hover nâng thẻ lên */
+}
+
+.traffic-sign-card img {
+  width: 90%; /* Đảm bảo ảnh chiếm 90% chiều rộng của thẻ */
+  height: auto; /* Chiều cao ảnh tự động theo tỷ lệ */
+  object-fit: cover; /* Đảm bảo ảnh không bị biến dạng, cắt theo tỉ lệ */
+  border-radius: 4px; /* Bo góc ảnh */
+  margin: 0 auto 10px; /* Căn giữa ảnh và tạo khoảng cách dưới ảnh */
+  display: block; /* Đảm bảo ảnh là một block element để có thể căn giữa */
+}
+
+
+.traffic-sign-card h3 {
+  font-size: 18px;
+  color: #333;
+  margin: 10px 0;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 0 10px;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.icon:hover {
+  color: #0056b3;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+  .traffic-signs-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 ô mỗi hàng trên màn hình rộng vừa phải */
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .traffic-signs-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 ô mỗi hàng trên màn hình nhỏ hơn */
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .traffic-signs-grid {
+    grid-template-columns: 1fr; /* 1 ô mỗi hàng trên màn hình rất nhỏ */
+  }
+}
+
+/* testttt */
 
 .traffic-sign-details {
   position: fixed; /* Fixes the position */
 
   width: 21%;
+  /* width: calc(100% - 70%px); */
+
   right: 1%;
   padding: 30px;
   padding-top: 40px;
@@ -95,6 +189,7 @@
 }
 
 .traffic-sign-details h2 {
+  margin-top: 50px;
   font-size: 26px; /* Tăng kích thước chữ cho tiêu đề */
   margin-bottom: 15px;
   font-weight: 600; /* Tăng độ đậm để tiêu đề thêm nổi bật */
@@ -247,7 +342,7 @@
   width: 30%;
   display: flex;
   justify-content: flex-end; /* Căn thanh tìm kiếm về phía bên phải */
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   margin-right: 30%;
   padding-left: 5px;
   padding-top: 10px;
@@ -276,5 +371,25 @@
 .upper-container {
   width: 100%; /* Đảm bảo rộng bằng với phần chứa nó */
   display: flex;
-  justify-content: flex-end; /* Căn phải các thành phần bên trong */
+  justify-content: space-between; /* Đảm bảo các phần tử con (pagination-container, search-container) được phân bố hợp lý */
+}
+.pagination-container {
+  text-align: left; /* Căn phần pagination-container sang trái */
+  flex: 1; /* Chiếm hết không gian có sẵn để phân bố các phần tử */
+}
+
+.pagination-controlss{
+  display: flex;
+  justify-content: flex-start; /* Căn toàn bộ sang phải */
+  gap: 20px; /* Khoảng cách giữa các thành phần */
+  padding: 10px;
+  border-radius: 5px; /* Góc bo tròn */
+}
+
+.class-for-span {
+  display: inline-block; /* Đảm bảo span có thể áp dụng các thuộc tính như margin tự động */
+  text-align: center; /* Căn giữa nội dung của span */
+  margin-left: auto; /* Tạo khoảng cách tự động ở bên trái */
+  margin-right: auto; /* Tạo khoảng cách tự động ở bên phải */
+  margin-top: 7px;
 }
