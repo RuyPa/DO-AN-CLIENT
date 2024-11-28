@@ -25,7 +25,7 @@
 
 .sidebar ul li a {
   display: block;
-  padding: 12px 20px;
+  padding: 12px 15px;
   border-radius: 8px;
   font-size: 18px;
   font-weight: bold;
@@ -122,3 +122,20 @@
 .logout-button:hover {
   color: #c0392b;
 }
+/* Đảm bảo rằng các icon trong thanh sidebar có chiều rộng và chiều cao giống nhau */
+.icon-sidebar {
+  width: 20px;  /* Thiết lập chiều rộng đồng nhất cho tất cả các biểu tượng */
+  height: 20px; /* Thiết lập chiều cao đồng nhất cho tất cả các biểu tượng */
+  margin-right: 10px; /* Khoảng cách giữa icon và chữ */
+}
+
+/* Căn chỉnh các mục trong sidebar (cả icon và text) theo chiều ngang */
+.sidebar ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+
+
+

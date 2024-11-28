@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons'; // Import Font Awesome icon
 import { API_VPS } from '../constant/constants';
-
+import { faRobot, faHome, faUser, faTrafficLight, faFlask, faCogs, faUsers } from '@fortawesome/free-solid-svg-icons';
 function Sidebar() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -68,71 +68,83 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <ul>
-        <li>
-          <Link
-            to="/home"
-            className={location.pathname === '/home' ? 'active' : ''}
-          >
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/profile"
-            className={location.pathname === '/profile' ? 'active' : ''}
-          >
-            Profile
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/library"
-            className={location.pathname === '/library' ? 'active' : ''}
-          >
-            Library
-          </Link>
-        </li>
+  <li>
+    <Link
+      to="/home"
+      className={location.pathname === '/home' ? 'active' : ''}
+    >
+            <FontAwesomeIcon
+        icon={faHome}
+        color={location.pathname === '/home' ? '#ffffff' : 'black'}
+        className="icon-sidebar"
+      />
+      Home
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/profile"
+      className={location.pathname === '/profile' ? 'active' : ''}
+    >
+      <FontAwesomeIcon icon={faUser} color={location.pathname === '/profile' ? '#ffffff' : 'black'} className="icon-sidebar" />
+      Profile
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/library"
+      className={location.pathname === '/library' ? 'active' : ''}
+    >
+      <FontAwesomeIcon icon={faTrafficLight} color={location.pathname === '/library' ? '#ffffff' : 'black'} className="icon-sidebar" />
+      Library
+    </Link>
+  </li>
 
-        <li>
-          <Link
-            to="/sample"
-            className={location.pathname === '/sample' ? 'active' : ''}
-          >
-            Sample
-          </Link>
-        </li>
+  <li>
+    <Link
+      to="/sample"
+      className={location.pathname === '/sample' ? 'active' : ''}
+    >
+      <FontAwesomeIcon icon={faFlask} color={location.pathname === '/sample' ? '#ffffff' : 'black'} className="icon-sidebar" />
+      Sample
+    </Link>
+  </li>
 
-        {(role === "admin") && (
-          <li>
-            <Link
-              to="/model"
-              className={location.pathname === '/model' ? 'active' : ''}
-            >
-              Model
-            </Link>
-          </li>
-        )}
+  {(role === "admin") && (
+    <li>
+      <Link
+        to="/model"
+        className={location.pathname === '/model' ? 'active' : ''}
+      >
+        <FontAwesomeIcon icon={faCogs} color={location.pathname === '/model' ? '#ffffff' : 'black'} className="icon-sidebar" />
+        Model
+      </Link>
+    </li>
+  )}
 
-        {(role === "admin") && (
-          <li>
-            <Link
-              to="/user"
-              className={location.pathname === '/user' ? 'active' : ''}
-            >
-              User Manage
-            </Link>
-          </li>
-        )}
+  {(role === "admin") && (
+    <li>
+      <Link
+        to="/user"
+        className={location.pathname === '/user' ? 'active' : ''}
+      >
+        <FontAwesomeIcon icon={faUsers} color={location.pathname === '/user' ? '#ffffff' : 'black'} className="icon-sidebar" />
+        User Manage
+      </Link>
+    </li>
+  )}
 
-        <li>
-          <Link
-            to="/createModel"
-            className={location.pathname === '/createModel' ? 'active' : ''}
-          >
-            Train Model
-          </Link>
-        </li>
-      </ul>
+  <li>
+    <Link
+      to="/createModel"
+      className={location.pathname === '/createModel' ? 'active' : ''}
+    >
+      <FontAwesomeIcon icon={faRobot} color={location.pathname === '/createModel' ? '#ffffff' : 'black'} className="icon-sidebar" />
+      Train Model
+    </Link>
+  </li>
+</ul>
+
 
 
 

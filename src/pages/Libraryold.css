@@ -339,7 +339,7 @@
 
 
 .search-container {
-  width: 30%;
+  width: 25%;
   display: flex;
   justify-content: flex-end; /* Căn thanh tìm kiếm về phía bên phải */
   /* margin-bottom: 20px; */
@@ -392,4 +392,66 @@
   margin-left: auto; /* Tạo khoảng cách tự động ở bên trái */
   margin-right: auto; /* Tạo khoảng cách tự động ở bên phải */
   margin-top: 7px;
+}
+
+
+/* Container của dropdown */
+.category-dropdown {
+  margin-top: 8px;
+  margin-right: 20px;
+
+}
+
+/* Style cho select element */
+.category-dropdown select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none; /* Xóa default appearance của select */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center; 
+
+}
+
+/* Khi hover vào select */
+.category-dropdown select:hover {
+  border-color: #e74c3c;
+  background-color: #f0f8ff;
+}
+
+/* Khi select được focus */
+.category-dropdown select:focus {
+  outline: none;
+  border-color: #e74c3c;
+}
+
+/* Option trong select */
+.category-dropdown select option {
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Khi không có dữ liệu, placeholder sẽ hiển thị */
+.category-dropdown select option:first-child {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Disable select */
+.category-dropdown select:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+/* Khi dropdown đang loading, hiển thị vòng tròn quay */
+.category-dropdown.loading select {
+  background: url('https://www.w3.org/Icons/valid-xhtml11') no-repeat right center;
+  padding-right: 30px; /* Để có không gian cho biểu tượng loading */
 }
