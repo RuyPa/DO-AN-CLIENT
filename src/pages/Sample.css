@@ -182,3 +182,139 @@ canvas {
 .sample-action-icon:hover {
   transform: scale(1.1);
 }
+
+.search-form{
+  width: 70%;
+  color: white;
+  align-items: end;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: sticky; /* Giữ nút cố định khi cuộn */
+  top: 10px; /* Khoảng cách từ trên cùng của container */
+  z-index: 1000; /* Đảm bảo nút không bị che khuất */
+}
+
+/* Container chứa cả hai nút */
+.sticky-buttons-container {
+  position: sticky;
+  top: 10px;  /* Khoảng cách từ trên cùng */
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;  /* Chia đều không gian giữa các nút */
+  padding: 10px; /* Padding để các nút không dính vào cạnh */
+}
+
+/* Nút Add Sample */
+.add-sample-buttonn {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 10px; /* Giảm kích thước chữ */
+  padding: 6px 12px; /* Giảm padding để nút nhỏ hơn */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 80px; /* Đảm bảo nút không quá nhỏ */
+  text-align: center; /* Căn chỉnh chữ ở giữa */
+}
+
+
+/* Nút Search (tạo lớp riêng để áp dụng các kiểu) */
+.search-form {
+  display: flex;
+  gap: 10px;
+  color: white;
+  padding: 0;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.search-containerr{
+  width: 100%;
+  display: flex;
+  background-color: white;
+  justify-content: flex-end; /* Căn thanh tìm kiếm về phía bên phải */
+  /* margin-bottom: 20px; */
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #e74c3c;
+  border-radius: 100px;
+}
+
+.search-inputt {
+  flex-grow: 1;
+  border: none;
+  width: 95%;
+  outline: none; 
+  margin-left: 5px;
+  margin-right: 5px;
+
+}
+
+
+
+/* Container của dropdown */
+.category-dropdownn {
+  margin-top: 8px;
+
+}
+
+/* Style cho select element */
+.category-dropdownn select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none; /* Xóa default appearance của select */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center; 
+
+}
+
+/* Khi hover vào select */
+.category-dropdownn select:hover {
+  border-color: #e74c3c;
+  background-color: #f0f8ff;
+}
+
+/* Khi select được focus */
+.category-dropdownn select:focus {
+  outline: none;
+  border-color: #e74c3c;
+}
+
+/* Option trong select */
+.category-dropdownn select option {
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Khi không có dữ liệu, placeholder sẽ hiển thị */
+.category-dropdownn select option:first-child {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Disable select */
+.category-dropdownn select:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+/* Khi dropdownn đang loading, hiển thị vòng tròn quay */
+.category-dropdownn.loading select {
+  background: url('https://www.w3.org/Icons/valid-xhtml11') no-repeat right center;
+  padding-right: 30px; /* Để có không gian cho biểu tượng loading */
+}

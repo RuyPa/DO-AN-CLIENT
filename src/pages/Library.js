@@ -24,7 +24,7 @@ function Library() {
 
   // Thêm các state liên quan đến phân trang
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(8);
   const [pagination, setPagination] = useState({ total_items: 0, total_pages: 0 });
   const [loading, setLoading] = useState(false);
 
