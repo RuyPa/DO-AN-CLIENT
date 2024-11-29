@@ -206,13 +206,14 @@ canvas {
   display: flex;
   justify-content: space-between;  /* Chia đều không gian giữa các nút */
   padding: 10px; /* Padding để các nút không dính vào cạnh */
+  gap: 10px;
 }
 
 /* Nút Add Sample */
 .add-sample-buttonn {
   background-color: #4CAF50;
   color: white;
-  font-size: 10px; /* Giảm kích thước chữ */
+  font-size: 15px; /* Giảm kích thước chữ */
   padding: 6px 12px; /* Giảm padding để nút nhỏ hơn */
   border: none;
   border-radius: 5px;
@@ -220,6 +221,8 @@ canvas {
   transition: background-color 0.3s ease;
   min-width: 80px; /* Đảm bảo nút không quá nhỏ */
   text-align: center; /* Căn chỉnh chữ ở giữa */
+  height: 45%;
+  width: 30%;
 }
 
 
@@ -262,12 +265,12 @@ canvas {
 /* Container của dropdown */
 .category-dropdownn {
   margin-top: 8px;
-
+width: 140%;
 }
 
 /* Style cho select element */
 .category-dropdownn select {
-  width: 100%;
+  width: 50%;
   padding: 10px;
   font-size: 14px;
   color: #333;
@@ -317,4 +320,78 @@ canvas {
 .category-dropdownn.loading select {
   background: url('https://www.w3.org/Icons/valid-xhtml11') no-repeat right center;
   padding-right: 30px; /* Để có không gian cho biểu tượng loading */
+}
+
+
+
+.category-dropdownn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px; /* Khoảng cách giữa phần phân trang và dropdown */
+  margin-bottom: 20px; /* Thêm khoảng cách phía dưới nếu cần */
+}
+
+.pagination {
+  width: 180%;
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Khoảng cách giữa các phần tử trong phần phân trang */
+}
+
+.page-size-select {
+  width: 80px; /* Đặt kích thước cho dropdown page size */
+}
+
+.category-select {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.pagination button, 
+.pagination select {
+  width: 20%;
+  padding: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination button {
+  width: 10%;
+  background-color: #007bff;
+  color: white;
+  border: 1px solid #e74c3c;
+  background-color: #e74c3c;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #e74c3c;
+}
+.pagination span {
+  color: black; /* Màu chữ */
+  font-size: 14px; /* Cỡ chữ */
+  font-weight: bold; /* Đặt chữ đậm (tuỳ chọn) */
+  width: 30%;
+  text-align: center;
+}
+.search-inputt {
+  position: relative;
+  z-index: 10; /* Đảm bảo input không bị che khuất */
+  width: 100%;
+  padding: 8px;
 }
