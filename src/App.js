@@ -14,6 +14,7 @@ import Login from './components/Login';
 import User from './pages/User';
 import AddUser from './pages/AddUser';
 import UpdateUser from './pages/UpdateUser';
+import RetrainModel from './pages/RetrainModel';
 
 function App() {
     return (
@@ -56,6 +57,7 @@ const ProtectedApp = () => {
                     <Route path="/user" element={<User />} />
                     <Route path="/add-user" element={<AddUser />} />
                     <Route path="/update-user" element={<UpdateUser />} />
+                    <Route path="/retrain-model" element={<RetrainModel />} />
 
                 </Routes>
             </div>

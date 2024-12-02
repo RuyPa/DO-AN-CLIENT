@@ -26,17 +26,17 @@ h4 {
 }
 
 .model-list {
-  flex: 0 0 30%; /* Model list takes 30% of the height */
+  flex: 0 0 35%; /* Model list takes 30% of the height */
   overflow: hidden; /* Hide overflow */
   padding: 10px; /* Padding around the model list */
+  padding-bottom: 0px;
   border-radius: 10px; /* Rounded corners */
   border: 3px solid #e76969; /* Border color */
   box-shadow: 0 4px 8px rgba(221, 57, 57, 0.1); /* Shadow effect */
-  margin-bottom: 20px; /* Space below the model list */
 }
 
 .scrollable-model-table {
-  height: 80%; /* Height of the scrollable table */
+  height: 75%; /* Height of the scrollable table */
   overflow-y: auto; /* Enable vertical scrolling */
   overflow-x: hidden; /* Disable horizontal scrolling */
 }
@@ -249,3 +249,68 @@ input[type="checkbox"] {
 }
 
 
+.update-user-containerr {
+  height: 4%;
+  width: 25%;
+  overflow: hidden; /* Đảm bảo không có phần tử con nào vượt ra ngoài */
+  transition: height 0.3s ease; /* Thêm hiệu ứng nếu cần */
+padding: 25px;
+padding-bottom: 13px;
+padding-left: 0px;
+  display: flex;
+  align-items: center; /* Căn chỉnh theo chiều dọc */
+  
+
+  position: relative; /* Đảm bảo không bị chồng lấn với các phần khác */
+  z-index: 1; /* Đảm bảo nó ở trên các phần khác nếu có */
+}
+.model-details-container {
+  position: relative;
+}
+
+.update-model-tagg{
+  /* position: absolute; /* Định vị tag trong container */
+  top: -30px; /* Đưa tag lên trên container */
+  right: 89px; /* Căn tag sát mép phải của container */
+  background-color: #9e5353; /* Màu nền đỏ nhạt */
+  color: white; /* Màu chữ trắng */
+  font-size: 14px; /* Kích thước chữ */
+  padding: 5px 15px; /* Khoảng cách nội dung trong tag */
+  border-radius: 15px; /* Góc bo tròn cho tag */
+  font-weight: bold; /* Chữ in đậm */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+  cursor: pointer;  /* Hiển thị con trỏ tay khi di chuột vào */
+  transition: background-color 0.2s ease; 
+  
+}
+
+.train-model-tagg{
+    /* position: absolute; /* Định vị tag trong container */
+    top: -30px; /* Đưa tag lên trên container */
+    right: 89px; /* Căn tag sát mép phải của container */
+    background-color: #9e5353; /* Màu nền đỏ nhạt */
+    color: white; /* Màu chữ trắng */
+    font-size: 14px; /* Kích thước chữ */
+    padding: 5px 15px; /* Khoảng cách nội dung trong tag */
+    border-radius: 15px; /* Góc bo tròn cho tag */
+    font-weight: bold; /* Chữ in đậm */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+    cursor: pointer;  /* Hiển thị con trỏ tay khi di chuột vào */
+    transition: background-color 0.2s ease; 
+}
+
+
+
+
+
+
+.update-model-tagg.active,
+.train-model-tagg.active {
+  background-color: #e74c3c;
+}
+
+.update-model-tagg.disabled {
+  cursor: not-allowed;
+  background-color: #f0f0f0;
+  color: #ccc;
+}

@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons'; // Import Font Awesome icon
 import { API_VPS } from '../constant/constants';
-import { faRobot, faHome, faUser, faTrafficLight, faFlask, faCogs, faUsers } from '@fortawesome/free-solid-svg-icons';
+import {  faHome, faUser, faTrafficLight, faFlask, faCogs, faUsers } from '@fortawesome/free-solid-svg-icons';
 function Sidebar() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -134,15 +134,6 @@ function Sidebar() {
     </li>
   )}
 
-  <li>
-    <Link
-      to="/createModel"
-      className={location.pathname === '/createModel' ? 'active' : ''}
-    >
-      <FontAwesomeIcon icon={faRobot} color={location.pathname === '/createModel' ? '#ffffff' : 'black'} className="icon-sidebar" />
-      Train Model
-    </Link>
-  </li>
 </ul>
 
 

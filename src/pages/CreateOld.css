@@ -1,68 +1,125 @@
-.create-sample-container {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    margin-left: 200px;
+/* ModelCreation.css */
+.model-creation-section {
+  height: 30%;
+
+  padding: 20px;
+  background-color: #f4f4f4;
+  margin-left: 220px;
+  padding-bottom: 120px; /* Để tránh đè lên phần footer */
+  display: flex;
+  flex-direction: column;
+}
+
+
+.model-creation-start-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.model-creation-start-button:hover {
+  background-color: #0056b3;
+}
+
+.model-creation-progress {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+.model-creation-progress-bar {
+  margin-top: 10px;
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 10px; /* Bo tròn toàn bộ thanh nền */
+  overflow: hidden;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.model-creation-bar {
+  height: 30px;
+  background-color: #4caf50;
+  width: 0;
+  transition: width 0.4s ease-in-out; /* Hiệu ứng thay đổi độ rộng */
+  border-radius: 10px; /* Bo tròn cả hai đầu */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Đổ bóng để nổi bật */
+}
+
+
+.model-creation-bar-animated {
+  animation: progress-animation 2s ease-in-out forwards; /* Thêm hiệu ứng animation khi progress chạy */
+}
+
+@keyframes progress-animation {
+  from {
+    width: 0;
   }
-  
-  .create-form-container {
-    width: 67%; /* Manage the width of the form container */
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-  
-  .create-form-container input[type="text"],
-  .create-form-container input[type="file"] {
+  to {
     width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    overflow: hidden;
   }
-  
-  .label-details-container {
-    width: 100%;
-    overflow-x: auto;
-  }
-  
-  .label-details-container table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .label-details-container th,
-  .label-details-container td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  .label-details-container input[type="text"] {
-    width: 100%; /* Allows full use of cell space */
-    border: none;
-    text-overflow: ellipsis;
-  }
-  
-  .create-form-container button {
-    padding: 10px 20px;
-    margin-top: 10px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .create-form-container button:hover {
-    background-color: #0056b3;
-  }
-  
-  .create-sample-container img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 10px;
-  }
-  
+}
+
+.sample-table-wrapper {
+  max-height: 30%; /* Chỉ định chiều cao tối đa của phần hiển thị bảng */
+  overflow-y: auto;  /* Kích hoạt cuộn dọc khi nội dung vượt quá chiều cao */
+  border: 1px solid #ddd; /* Tùy chọn thêm viền cho phần cuộn */
+  margin-bottom: 10px; /* Khoảng cách dưới bảng */
+}
+.sample-table {
+  width: 100%;
+  height: 5%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.sample-table th, .sample-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center; /* Căn giữa nội dung */
+  vertical-align: middle; /* Căn giữa theo chiều dọc */
+}
+
+
+.sample-table th {
+  background-color: #f2f2f2;
+}
+
+.sample-image {
+  max-width: 100px; /* Giới hạn chiều rộng tối đa nhưng giữ tỉ lệ */
+  height: auto; /* Giữ nguyên tỉ lệ chiều cao theo chiều rộng */
+}
+
+.model-creation-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 80%; 
+  background-color: #ffffff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 240px;
+}
+
+
+
+
+/* .sample-table {
+  width: 100%;
+  border-collapse: collapse;
+} */
+
+.sample-table th, .sample-table td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.sample-table th {
+  background-color: #f4f4f4;
+}

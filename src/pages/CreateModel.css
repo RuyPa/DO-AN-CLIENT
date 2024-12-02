@@ -1,96 +1,224 @@
-/* ModelCreation.css */
 .model-creation-section {
+  height: 50vh; /* Chiếm 50% chiều cao màn hình */
   padding: 20px;
-  background-color: #f4f4f4;
-  margin-left: 220px;
-  padding-bottom: 120px; /* Để tránh đè lên phần footer */
+  background-color: #ffffff;
+  /* margin-left: 220px; */
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: flex-start; /* Đảm bảo các phần tử không bị đẩy lên trên */
+  border-radius: 10px; /* Rounded corners */
+  border: 3px solid #e76969; /* Border color */
 }
 
-
-.model-creation-start-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
+.model-creation-header {
+  display: flex;
+  justify-content: space-between; /* Đặt các phần tử ở hai bên */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  margin-bottom: 10px; /* Đảm bảo có khoảng cách nhỏ giữa header và bảng */
 }
 
-.model-creation-start-button:hover {
-  background-color: #0056b3;
+.model-creation-header h2 {
+  margin: 0;
 }
 
-.model-creation-progress {
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  color: #333;
+.model-creation-controls {
+  display: flex;
+  justify-content: flex-end; /* Đặt phần tử cuối cùng ở phía bên phải */
+  align-items: center;
+  width: 70%;
 }
 
-.model-creation-progress-bar {
+.page-size-section {
+  margin-right: 20px; /* Khoảng cách giữa Page Size và Search */
+}
+
+.page-size-section label {
+  margin-right: 5px;
+}
+
+.search-section {
+  display: flex;
+  align-items: center;
+}
+
+.search-section label {
+  margin-right: 10px;
+}
+
+.search-section input {
+  padding: 5px;
+  width: 200px; /* Chiều rộng input tìm kiếm */
+}
+
+/* Bảng mẫu */
+.sample-table-wrapper {
+  flex-grow: 1; /* Cho phép bảng mở rộng hết không gian còn lại */
+  max-height: calc(50vh - 105px); /* Chiều cao cố định cho bảng, trừ đi khoảng cách từ header */
+  overflow-y: auto; /* Cho phép cuộn dọc nếu nội dung vượt quá chiều cao */
+  border: 1px solid #ddd;
   margin-top: 10px;
-  width: 100%;
-  background-color: #e0e0e0;
-  border-radius: 10px; /* Bo tròn toàn bộ thanh nền */
-  overflow: hidden;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.model-creation-bar {
-  height: 30px;
-  background-color: #4caf50;
-  width: 0;
-  transition: width 0.4s ease-in-out; /* Hiệu ứng thay đổi độ rộng */
-  border-radius: 10px; /* Bo tròn cả hai đầu */
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Đổ bóng để nổi bật */
-}
-
-
-.model-creation-bar-animated {
-  animation: progress-animation 2s ease-in-out forwards; /* Thêm hiệu ứng animation khi progress chạy */
-}
-
-@keyframes progress-animation {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
 }
 
 .sample-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  height: 100%; /* Đảm bảo bảng chiếm toàn bộ chiều cao của wrapper */
 }
 
 .sample-table th, .sample-table td {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: center; /* Căn giữa nội dung */
-  vertical-align: middle; /* Căn giữa theo chiều dọc */
+  text-align: center;
+  vertical-align: middle;
 }
-
 
 .sample-table th {
   background-color: #f2f2f2;
 }
 
 .sample-image {
-  max-width: 100px; /* Giới hạn chiều rộng tối đa nhưng giữ tỉ lệ */
-  height: auto; /* Giữ nguyên tỉ lệ chiều cao theo chiều rộng */
+  max-width: 100px;
+  height: auto;
 }
 
+/* Phần footer */
 .model-creation-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 80%; /* Điều chỉnh để trừ ra khoảng cách của sidebar */
   background-color: #ffffff;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 240px;
+  /* margin-left: 240px; */
+  height: 60px;
+  /* border-top: 1px solid #ddd; */
+  margin-top: 10px; /* Khoảng cách giữa bảng và footer */
+}
+
+/* Phần điều khiển */
+.page-size-section,
+.pagination-section,
+.search-section {
+  display: flex;
+  align-items: center;
+  margin: 0 10px; /* Khoảng cách giữa các phần tử */
+}
+
+.search-section {
+  width: 30%;
+  display: flex;
+  background-color: white;
+  justify-content: flex-end; /* Căn thanh tìm kiếm về phía bên phải */
+  /* margin-bottom: 20px; */
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #e74c3c;
+  border-radius: 100px;
+}
+
+.search-section input{
+  flex-grow: 1;
+  margin-left: 5px;
+  border: none;
+  width: 90%;
+  outline: none; /* Thêm dòng này để loại bỏ đường viền khi focus */
+}
+.pagination-section {
+  justify-content: center; /* Canh giữa phần pagination */
+}
+
+.pagination-section button {
+  text-align: center;
+  align-items: center;
+  width: 10%;
+  background-color: #007bff;
+  color: white;
+  border: 1px solid #e74c3c;
+  background-color: #e74c3c;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.pagination-section span{
+  padding: 5px;
+  text-align: center;
+}
+.page-size-selectt{
+  font-size: 14px;
+  cursor: pointer;
+  padding: 5px;
+  width: 50%;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #e76969;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none; /* Xóa default appearance của select */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center; 
+}
+.model-creation-start-button{
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 20%;
+}
+
+.category-section select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none; /* Xóa default appearance của select */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center; 
+
+}
+
+/* Khi hover vào select */
+.category-section select:hover {
+  border-color: #e74c3c;
+  background-color: #f0f8ff;
+}
+
+/* Khi select được focus */
+.category-section select:focus {
+  outline: none;
+  border-color: #e74c3c;
+}
+
+/* Option trong select */
+.category-section select option {
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Khi không có dữ liệu, placeholder sẽ hiển thị */
+.category-section select option:first-child {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Disable select */
+.category-section select:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+/* Khi section đang loading, hiển thị vòng tròn quay */
+.category-section.loading select {
+  background: url('https://www.w3.org/Icons/valid-xhtml11') no-repeat right center;
+  padding-right: 30px; /* Để có không gian cho biểu tượng loading */
 }

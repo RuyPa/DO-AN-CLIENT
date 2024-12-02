@@ -367,6 +367,7 @@ width: 140%;
 }
 
 .pagination button {
+  text-align: center;
   width: 10%;
   background-color: #007bff;
   color: white;

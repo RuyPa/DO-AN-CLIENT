@@ -259,7 +259,7 @@ function Library() {
 <div className="pagination-container">
 <div className="pagination-controlss">
     <div className="page-size-selector">
-      <label htmlFor="page-size">Số hàng mỗi trang: </label>
+      <label htmlFor="page-size">Page Size: </label>
       <select
         id="page-size"
         value={pageSize}
@@ -275,7 +275,7 @@ function Library() {
 
     <div className="pagination-buttons">
       <button onClick={handlePreviousPage} disabled={loading || currentPage === 1}>&#8249;</button>
-      <span className='class-for-span'>{`Trang ${currentPage} / ${pagination.total_pages}`}</span>
+      <span className='class-for-span'>{`Page ${currentPage} / ${pagination.total_pages}`}</span>
       <button onClick={handleNextPage} disabled={loading || currentPage === pagination.total_pages}>&#8250;</button>
     </div>
   </div>
