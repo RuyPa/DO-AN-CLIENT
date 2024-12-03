@@ -15,6 +15,7 @@ import User from './pages/User';
 import AddUser from './pages/AddUser';
 import UpdateUser from './pages/UpdateUser';
 import RetrainModel from './pages/RetrainModel';
+import ModelTable from './pages/ModelTable';
 
 function App() {
     return (
@@ -58,7 +59,7 @@ const ProtectedApp = () => {
                     <Route path="/add-user" element={<AddUser />} />
                     <Route path="/update-user" element={<UpdateUser />} />
                     <Route path="/retrain-model" element={<RetrainModel />} />
-
+                    <Route path='/model-static' element={<ModelTable/>}/>
                 </Routes>
             </div>
         </div>

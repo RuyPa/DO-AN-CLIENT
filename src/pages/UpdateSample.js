@@ -21,7 +21,7 @@ const UpdateSample = () => {
 
   // Fetch traffic signs from API
   useEffect(() => {
-    fetch(API_VPS + '/api/traffic_signs', {
+    fetch(`${API_VPS}/api/traffic_signs`, {
       credentials: 'include'  
     })
       .then(response => response.json())
@@ -32,7 +32,7 @@ const UpdateSample = () => {
   // Fetch the existing sample data using the ID from the URL and fill form fields
   useEffect(() => {
     if (id) {
-      fetch(API_VPS + '/api/samples/${id}', {
+      fetch(`${API_VPS}/api/samples/${id}`, {
         credentials: 'include'  
       })
         .then(response => response.json())
@@ -234,7 +234,7 @@ const UpdateSample = () => {
     };
   
     // Make the PUT request to the API
-    fetch(API_VPS + '/api/samples/${id}', {
+    fetch(`${API_VPS}/api/samples/${id}`, {
       credentials: 'include' ,
       method: 'PUT',
       headers: {

@@ -768,13 +768,13 @@ const RetrainModel = ({ modelId }) => {  // Accept modelId as a prop
   const [selectedSamples, setSelectedSamples] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
   const [page, setPage] = useState(1); // Trang hiện tại
-  const [pageSize, setPageSize] = useState(10); // Số mẫu mỗi trang
+  const [pageSize, setPageSize] = useState(20); // Số mẫu mỗi trang
   const [keyword, setKeyword] = useState(null); // Từ khóa tìm kiếm
   const [categoryId, setCategoryId] = useState(null); // ID của loại biển báo
   const [categories, setCategories] = useState([]); // Danh sách các loại biển báo
   const [pagination, setPagination] = useState({
     current_page: 1,
-    page_size: 10,
+    page_size: 20,
     total_items: 0,
     total_pages: 0
   });
@@ -875,7 +875,7 @@ const RetrainModel = ({ modelId }) => {  // Accept modelId as a prop
   }, [samples, modelSamples]); // Chạy mỗi khi samples hoặc modelSamples thay đổi
 
   const startModelCreation = () => {
-    fetch('http://localhost:5001/api/start-model', {
+    fetch(`http://localhost:5001/api/retrain-model/${modelId}`, {
       credentials: 'include',
       method: 'POST',
       headers: {
@@ -937,9 +937,9 @@ const RetrainModel = ({ modelId }) => {  // Accept modelId as a prop
           <div className="page-size-section">
             <label>Page Size: </label>
             <select value={pageSize} onChange={(e) => setPageSize(parseInt(e.target.value))} className='page-size-selectt'>
-              <option value={10}>10</option>
               <option value={20}>20</option>
               <option value={50}>50</option>
+              <option value={100}>100</option>
             </select>
           </div>
 

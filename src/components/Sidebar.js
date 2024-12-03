@@ -133,6 +133,17 @@ function Sidebar() {
       </Link>
     </li>
   )}
+    {(role === "admin") && (
+    <li>
+      <Link
+        to="/model-static"
+        className={location.pathname === '/model-static' ? 'active' : ''}
+      >
+        <FontAwesomeIcon icon={faUsers} color={location.pathname === '/model-static' ? '#ffffff' : 'black'} className="icon-sidebar" />
+        Model Static
+      </Link>
+    </li>
+  )}
 
 </ul>
 
