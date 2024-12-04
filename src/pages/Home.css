@@ -1,0 +1,47 @@
+/* Container chính, margin trái = 200px */
+.home-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 20px;
+    height: 95vh; /* Đảm bảo chiếm toàn bộ chiều cao màn hình */
+    margin-left: 200px; /* Đặt margin trái là 200px */
+    width: calc(100% - 200px); /* Tính chiều rộng còn lại sau khi trừ đi margin trái */
+    box-sizing: border-box;
+    overflow: hidden; /* Đảm bảo không có phần tử nào tràn ra ngoài */
+}
+
+/* Grid Container chia màn hình thành 2 hàng với 2 ô mỗi hàng */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 cột trên mỗi hàng */
+    grid-template-rows: repeat(2, 1fr); /* 2 hàng có kích thước chia đều */
+    gap: 10px; /* Khoảng cách giữa các ô */
+    width: 100%;
+    height: 100%; /* Chiều cao của grid container là 100% */
+    max-width: 100%; /* Chiều rộng tối đa bằng với chiều rộng container */
+    box-sizing: border-box;
+    overflow: hidden; /* Không để phần tử tràn ra ngoài */
+}
+
+/* Các ô con trong grid */
+.grid-item {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Đảm bảo phần tử không tràn */
+    height: 100%; /* Đảm bảo mỗi ô có chiều cao đầy đủ */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Căn giữa các nội dung trong ô */
+}
+
+/* Responsive: Khi màn hình nhỏ hơn 1024px, sắp xếp thành 1 hàng 2 cột */
+@media (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(1, 1fr); /* Chia thành 1 cột */
+        grid-template-rows: repeat(4, auto); /* Tăng số hàng */
+    }
+}
