@@ -61,7 +61,7 @@ const SignSampleLabelStatsChart = () => {
 
   return (
     <div style={{ width: '80%', margin: '0 auto', height: '500px' }}>
-      <h2>Sample and Label Quantity By Traffic Sign</h2>
+      <div className='h2-catestat'><h2>Sample and Label Quantity By Traffic Sign</h2></div>
       <Bar
         data={chartData}
         options={{

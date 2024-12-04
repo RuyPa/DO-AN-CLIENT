@@ -177,7 +177,28 @@
   border: 1px solid #e74c3c; /* Border color */
 }
 
+/* Thanh cuộn chính */
+.traffic-sign-details::-webkit-scrollbar {
+  width: 6px; /* Giảm kích thước thanh cuộn */
+}
 
+/* Phần thanh cuộn có thể kéo (thumb) */
+.traffic-sign-details::-webkit-scrollbar-thumb {
+  background-color: #888; /* Màu thanh cuộn */
+  border-radius: 10px; /* Bo tròn các góc */
+  border: 2px solid #ccc; /* Viền mỏng xung quanh thanh cuộn */
+}
+
+/* Thanh cuộn khi hover */
+.traffic-sign-details::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Màu khi hover */
+}
+
+/* Phần nền của thanh cuộn (track) */
+.traffic-sign-details::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Màu nền cho track */
+  border-radius: 10px; /* Bo tròn các góc track */
+}
 
 
 .traffic-sign-details img {
@@ -454,4 +475,61 @@
 .category-dropdown.loading select {
   background: url('https://www.w3.org/Icons/valid-xhtml11') no-repeat right center;
   padding-right: 30px; /* Để có không gian cho biểu tượng loading */
+}
+/* Container for the dropdown label */
+.dropdown-label {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+  color: #333;
+}
+
+/* Style for the select dropdown itself */
+.dropdown-select {
+  width: 100%;  /* Make the select dropdown full-width */
+  padding: 0.5rem;  /* Padding inside the dropdown */
+  font-size: 1rem;  /* Font size for the options */
+  border: 1px solid #ccc;  /* Border styling */
+  border-radius: 5px;  /* Rounded corners */
+  background-color: #fff;  /* Background color for the dropdown */
+  color: #333;  /* Text color */
+  transition: border 0.3s ease;  /* Smooth transition for the border color */
+}
+
+/* Hover effect on the select dropdown */
+.dropdown-select:hover {
+  border-color: #007bff;  /* Change border color on hover */
+}
+
+/* Disabled state for the dropdown */
+.dropdown-select:disabled {
+  background-color: #f0f0f0;  /* Light gray background when disabled */
+  cursor: not-allowed;  /* Change cursor to indicate it's disabled */
+  border-color: #ddd;  /* Lighter border when disabled */
+}
+
+/* Styling for the options in the dropdown */
+.dropdown-option {
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #333;
+}
+
+/* Style for the selected option */
+.dropdown-option:checked {
+  background-color: #007bff;  /* Blue background for selected option */
+  color: white;  /* White text for selected option */
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .dropdown-select {
+    font-size: 0.9rem;  /* Slightly smaller text on smaller screens */
+  }
+
+  .dropdown-label {
+    font-size: 0.9rem;  /* Adjust label size on smaller screens */
+  }
 }

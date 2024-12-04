@@ -17,7 +17,7 @@ function Library() {
   });
   const [categories, setCategories] = useState([]);  // State mới để lưu trữ danh sách categories
   const [selectedCategory, setSelectedCategory] = useState(null);  // State để lưu trữ category đã chọn
-  const URL = API_VPS;
+  const URL_VPS = API_VPS;
   const [searchKeyword, setSearchKeyword] = useState('');
   const [debouncedKeyword, setDebouncedKeyword] = useState('');
   const role = localStorage.getItem("role");
@@ -27,6 +27,7 @@ function Library() {
   const [pageSize, setPageSize] = useState(8);
   const [pagination, setPagination] = useState({ total_items: 0, total_pages: 0 });
   const [loading, setLoading] = useState(false);
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -36,11 +37,13 @@ function Library() {
     return () => clearTimeout(handler);
   }, [searchKeyword]);
 
+
   // useEffect(() => {
   //   const fetchTrafficSigns = async () => {
   //     setLoading(true); // Bắt đầu tải dữ liệu
   //     try {
-  //       const response = await fetch(`${URL}/api/traffic_signs/search?keyword=${debouncedKeyword}&page=${currentPage}&page_size=${pageSize}`, {
+  //       const categoryQuery = selectedCategory ? `&category_id=${selectedCategory}` : '';  // Nếu có category_id, thêm vào query
+  //       const response = await fetch(`${URL_VPS}/api/traffic_signs/search?keyword=${debouncedKeyword}&page=${currentPage}&page_size=${pageSize}${categoryQuery}`, {
   //         credentials: 'include',
   //         headers: {
   //           'Authorization': `Bearer ${token}`,
@@ -56,15 +59,15 @@ function Library() {
   //       setLoading(false); // Dừng tải dữ liệu
   //     }
   //   };
-
+  
   //   fetchTrafficSigns();
-  // }, [debouncedKeyword, currentPage, pageSize, URL, token]);
+  // }, [debouncedKeyword, currentPage, pageSize, URL_VPS, token, selectedCategory]); // Thêm selectedCategory vào dependency array
   useEffect(() => {
     const fetchTrafficSigns = async () => {
       setLoading(true); // Bắt đầu tải dữ liệu
       try {
         const categoryQuery = selectedCategory ? `&category_id=${selectedCategory}` : '';  // Nếu có category_id, thêm vào query
-        const response = await fetch(`${URL}/api/traffic_signs/search?keyword=${debouncedKeyword}&page=${currentPage}&page_size=${pageSize}${categoryQuery}`, {
+        const response = await fetch(`${URL_VPS}/api/traffic_signs/search?keyword=${debouncedKeyword}&page=${currentPage}&page_size=${pageSize}${categoryQuery}`, {
           credentials: 'include',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -82,10 +85,10 @@ function Library() {
     };
   
     fetchTrafficSigns();
-  }, [debouncedKeyword, currentPage, pageSize, URL, token, selectedCategory]); // Thêm selectedCategory vào dependency array
+  }, [debouncedKeyword, currentPage, pageSize, URL_VPS, token, selectedCategory, reload]); // Thêm reload vào dependency
   
   const handleSignClick = (id) => {
-    fetch(`${URL}/api/traffic_signs/${id}`, {
+    fetch(`${URL_VPS}/api/traffic_signs/${id}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -125,14 +128,46 @@ function Library() {
     }));
   };
 
+  // const handleAddSign = () => {
+  //   const formData = new FormData();
+  //   formData.append('name', newSign.name);
+  //   formData.append('code', generateCode(newSign.name));
+  //   formData.append('description', newSign.description);
+  //   formData.append('image', newSign.image);
+  //   if (newSign.categoryId) {
+  //     formData.append('category_id', newSign.categoryId);  // Add category_id to the form data
+  //   }
+  
+  //   fetch(`${URL_VPS}/api/traffic_signs`, {
+  //     credentials: 'include',
+  //     method: 'POST',
+  //     headers: {
+  //       'Authorization': `Bearer ${token}`,
+  //       'Accept': 'application/json',
+  //     },
+  //     body: formData,
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       alert('Traffic sign created successfully');
+  //       setTrafficSigns(prevSigns => [...prevSigns, data]);
+  //       setShowAddForm(false);
+  //       setShowEditForm(false);
+  //       setNewSign({ name: '', description: '', image: null, categoryId: '' });  // Reset categoryId
+  //     })
+  //     .catch(error => console.error('Error creating traffic sign:', error));
+  // };
   const handleAddSign = () => {
     const formData = new FormData();
     formData.append('name', newSign.name);
     formData.append('code', generateCode(newSign.name));
     formData.append('description', newSign.description);
     formData.append('image', newSign.image);
-
-    fetch(`${URL}/api/traffic_signs`, {
+    if (newSign.categoryId) {
+      formData.append('category_id', newSign.categoryId);  // Add category_id to the form data
+    }
+  
+    fetch(`${URL_VPS}/api/traffic_signs`, {
       credentials: 'include',
       method: 'POST',
       headers: {
@@ -147,15 +182,36 @@ function Library() {
         setTrafficSigns(prevSigns => [...prevSigns, data]);
         setShowAddForm(false);
         setShowEditForm(false);
-        setNewSign({ name: '', description: '', image: null });
+        setNewSign({ name: '', description: '', image: null, categoryId: '' });  // Reset categoryId
+        setReload(prev => !prev); // Trigger reload to fetch new data
       })
       .catch(error => console.error('Error creating traffic sign:', error));
   };
+  
+
+  // const handleDeleteSign = (id) => {
+  //   const confirmDelete = window.confirm("Are you sure you want to delete this traffic sign?");
+  //   if (confirmDelete) {
+  //     fetch(`${URL_VPS}/api/traffic_signs/${id}`, {
+  //       headers: {
+  //         'Authorization': `Bearer ${token}`,
+  //         'Accept': 'application/json',
+  //       },
+  //       credentials: 'include',
+  //       method: 'DELETE',
+  //     })
+  //       .then(() => {
+  //         setTrafficSigns(prevSigns => prevSigns.filter(sign => sign.id !== id));
+  //         alert('Traffic sign deleted successfully');
+  //       })
+  //       .catch(error => console.error('Error deleting traffic sign:', error));
+  //   }
+  // };
 
   const handleDeleteSign = (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this traffic sign?");
     if (confirmDelete) {
-      fetch(`${URL}/api/traffic_signs/${id}`, {
+      fetch(`${URL_VPS}/api/traffic_signs/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Accept': 'application/json',
@@ -166,10 +222,12 @@ function Library() {
         .then(() => {
           setTrafficSigns(prevSigns => prevSigns.filter(sign => sign.id !== id));
           alert('Traffic sign deleted successfully');
+          setReload(prev => !prev); // Trigger reload to fetch new data
         })
         .catch(error => console.error('Error deleting traffic sign:', error));
     }
   };
+  
 
   const handleUpdateSign = (id) => {
     const signToEdit = trafficSigns.find(sign => sign.id === id);
@@ -187,16 +245,59 @@ function Library() {
     }
   };
 
+  // const handleSaveUpdate = (id) => {
+  //   const formData = new FormData();
+  //   formData.append('name', newSign.name);
+  //   formData.append('code', generateCode(newSign.name));
+  //   formData.append('description', newSign.description);
+  
+  //   // Chỉ thêm category_id nếu có thay đổi
+  //   if (newSign.categoryId) {
+  //     formData.append('category_id', newSign.categoryId);  // Truyền category_id trong payload
+  //   }
+  
+  //   // Nếu có hình ảnh mới, thêm vào formData
+  //   if (newSign.image) {
+  //     formData.append('image', newSign.image);
+  //   }
+  
+  //   fetch(`${URL_VPS}/api/traffic_signs/${id}`, {
+  //     credentials: 'include',
+  //     headers: {
+  //       'Authorization': `Bearer ${token}`,
+  //       'Accept': 'application/json',
+  //     },
+  //     method: 'PUT',
+  //     body: formData,
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       alert('Traffic sign updated successfully');
+  //       setTrafficSigns(prevSigns => prevSigns.map(sign => (sign.id === id ? data : sign)));
+  //       setShowEditForm(false);
+  //       setSelectedSign(data);
+  //       setNewSign({ name: '', description: '', image: null, categoryId: '' });  // Reset after update
+  //     })
+  //     .catch(error => console.error('Error updating traffic sign:', error));
+  // };
+  
   const handleSaveUpdate = (id) => {
     const formData = new FormData();
     formData.append('name', newSign.name);
     formData.append('code', generateCode(newSign.name));
     formData.append('description', newSign.description);
+  
+    // Chỉ thêm category_id nếu có thay đổi
+    if (newSign.categoryId) {
+      formData.append('category_id', newSign.categoryId);  // Truyền category_id trong payload
+    }
+  
+    // Nếu có hình ảnh mới, thêm vào formData
     if (newSign.image) {
       formData.append('image', newSign.image);
     }
-
-    fetch(`${URL}/api/traffic_signs/${id}`, {
+  
+    fetch(`${URL_VPS}/api/traffic_signs/${id}`, {
       credentials: 'include',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -211,11 +312,12 @@ function Library() {
         setTrafficSigns(prevSigns => prevSigns.map(sign => (sign.id === id ? data : sign)));
         setShowEditForm(false);
         setSelectedSign(data);
-        setNewSign({ name: '', description: '', image: null });
+        setNewSign({ name: '', description: '', image: null, categoryId: '' });  // Reset after update
+        setReload(prev => !prev); // Trigger reload to fetch new data
       })
       .catch(error => console.error('Error updating traffic sign:', error));
   };
-
+  
   // Xử lý các sự kiện phân trang
   const handlePreviousPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
@@ -233,7 +335,7 @@ function Library() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(`${URL}/api/categories`, {
+        const response = await fetch(`${URL_VPS}/api/categories`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/json',
@@ -247,7 +349,7 @@ function Library() {
     };
 
     fetchCategories();
-  }, [URL, token]);
+  }, [URL_VPS, token]);
 
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
@@ -383,6 +485,22 @@ function Library() {
               onChange={(e) => setNewSign((prevSign) => ({ ...prevSign, description: e.target.value }))}
               style={{ height: '100px' }} // Expanded height
             />
+{/* Add this dropdown for selecting category */}
+<label className="dropdown-label">Category:</label>
+<select 
+  className="dropdown-select"
+  value={newSign.categoryId || ''} 
+  onChange={(e) => setNewSign({ ...newSign, categoryId: e.target.value })}
+  disabled={loading}
+>
+  <option className="dropdown-option" value="">Select Category</option>
+  {categories.map((category) => (
+    <option className="dropdown-option" key={category.id} value={category.id}>
+      {category.name}
+    </option>
+  ))}
+</select>
+
 
             <label>Image:</label>
             <input type="file" onChange={handleFileChange} />
@@ -413,6 +531,22 @@ function Library() {
               onChange={(e) => setNewSign((prevSign) => ({ ...prevSign, description: e.target.value }))}
               style={{ height: '100px' }} // Expanded height
             />
+
+<label>Category:</label>
+<select 
+  className="dropdown-select"
+  value={newSign.categoryId || selectedSign?.category?.id || ''}  // Lấy categoryId từ newSign nếu có, hoặc selectedSign nếu đã có
+  onChange={(e) => setNewSign({ ...newSign, categoryId: e.target.value })}
+  disabled={loading}
+>
+  <option value="">Select Category</option>
+  {categories.map((category) => (
+    <option key={category.id} value={category.id}>
+      {category.name}
+    </option>
+  ))}
+</select>
+
 
             <label>Original Image:</label>
             {selectedSign && (

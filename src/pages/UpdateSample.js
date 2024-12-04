@@ -16,24 +16,37 @@ const UpdateSample = () => {
   const [isSelecting, setIsSelecting] = useState(false);
   const [startPoint, setStartPoint] = useState({ x: 0, y: 0 });
   const [deletedIds, setDeletedIds] = useState([]); // Biến chứa các ID bị xóa
+  const token = localStorage.getItem('accessToken');
 
   const navigate = useNavigate();
 
   // Fetch traffic signs from API
   useEffect(() => {
     fetch(`${API_VPS}/api/traffic_signs`, {
-      credentials: 'include'  
+      credentials: 'include'  ,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',  // Thêm Content-Type
+      },
+      
     })
       .then(response => response.json())
       .then(data => setTrafficSigns(data))
       .catch(error => console.error('Error fetching traffic signs:', error));
-  }, []);
+  }, [token]);
 
   // Fetch the existing sample data using the ID from the URL and fill form fields
   useEffect(() => {
     if (id) {
       fetch(`${API_VPS}/api/samples/${id}`, {
-        credentials: 'include'  
+        credentials: 'include' ,
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',  // Thêm Content-Type
+        },
+        
       })
         .then(response => response.json())
         .then(data => {
@@ -60,7 +73,7 @@ const UpdateSample = () => {
         })
         .catch(error => console.error('Error fetching sample details:', error));
     }
-  }, [id]);
+  }, [id, token]);
 
   // Function to draw labels on the image
   const drawLabels = (labels) => {
@@ -238,8 +251,11 @@ const UpdateSample = () => {
       credentials: 'include' ,
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json'
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',  // Thêm Content-Type
       },
+      
       body: JSON.stringify(postData)
     })
       .then(response => response.json())

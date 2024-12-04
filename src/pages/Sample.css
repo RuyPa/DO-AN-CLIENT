@@ -16,6 +16,29 @@
   height: 94vh;
 }
 
+/* Thanh cuộn chính */
+.samples-grid::-webkit-scrollbar {
+  width: 6px; /* Giảm kích thước thanh cuộn */
+}
+
+/* Phần thanh cuộn có thể kéo (thumb) */
+.samples-grid::-webkit-scrollbar-thumb {
+  background-color: #888; /* Màu thanh cuộn */
+  border-radius: 10px; /* Bo tròn các góc */
+  border: 2px solid #ccc; /* Viền mỏng xung quanh thanh cuộn */
+}
+
+/* Thanh cuộn khi hover */
+.samples-grid::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Màu khi hover */
+}
+
+/* Phần nền của thanh cuộn (track) */
+.samples-grid::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Màu nền cho track */
+  border-radius: 10px; /* Bo tròn các góc track */
+}
+
 .sample-card {
   padding: 3px;
   border: 1px solid #ddd;

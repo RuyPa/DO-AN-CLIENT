@@ -95,7 +95,7 @@ const ModelTable = () => {
 
   return (
     <div className="model-table">
-      <h2>Model Performance</h2>
+      <div className='h2-catestat'><h2>Model Performance</h2></div>
       <Line data={chartData} options={options} />
     </div>
   );
