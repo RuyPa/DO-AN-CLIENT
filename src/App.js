@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, AuthContext } from './contexts/AuthContext'; // Import AuthProvider và AuthContext
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext'; // Import AuthProvider và AuthContext
 import Sidebar from './components/Sidebar';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
@@ -38,11 +38,9 @@ function App() {
     );
 }
 
-// Component bảo vệ các route chính
 const ProtectedApp = () => {
-    const { isAuthenticated } = React.useContext(AuthContext); // Sử dụng AuthContext
-
-    return isAuthenticated ? (
+    // Bỏ qua việc kiểm tra isAuthenticated, mặc định cho phép truy cập
+    return (
         <div className="app-container" style={{ display: 'flex' }}>
             <Sidebar />
             <div className="content" style={{ flex: 1, padding: '20px' }}>
@@ -59,13 +57,13 @@ const ProtectedApp = () => {
                     <Route path="/add-user" element={<AddUser />} />
                     <Route path="/update-user" element={<UpdateUser />} />
                     <Route path="/retrain-model" element={<RetrainModel />} />
-                    <Route path='/model-static' element={<ModelTable/>}/>
+                    <Route path='/model-static' element={<ModelTable />} />
                 </Routes>
             </div>
         </div>
-    ) : (
-        <Navigate to="/login" />
     );
 };
+
+
 
 export default App;

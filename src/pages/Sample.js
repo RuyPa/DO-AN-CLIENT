@@ -1097,7 +1097,7 @@ import './Sample.css'; // Import CSS file
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesome component
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'; // Import specific icons
 import { useNavigate } from 'react-router-dom';
-import { API_VPS, API_BASE_URL } from '../constant/constants';
+import { API_VPS } from '../constant/constants';
 import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
 
 const Sample = () => {
@@ -1114,7 +1114,7 @@ const Sample = () => {
   const canvasRef = useRef(null);
   const navigate = useNavigate(); // Use navigate for redirection
   const token = localStorage.getItem('accessToken');
-  const URL = API_BASE_URL;
+  const URL = API_VPS;
 
   // Fetch samples based on search parameters
   useEffect(() => {
